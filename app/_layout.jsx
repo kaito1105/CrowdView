@@ -19,7 +19,8 @@ export default function RootLayout() {
         }
       }}>
       <Stack.Screen name="index" options={{title: ""}} />
-      <Stack.Screen name="tabs" options={{headerShown: false}} />
+      <Stack.Screen name="tabs" options={{headerShown: false, title: ""}} />
+      <Stack.Screen name="crowdInfo/crowdInfo" options={{title: "Crowd Info"}} />
     </Stack>
-  )
+  );
 }

@@ -1,26 +1,10 @@
+import { useRouter } from 'expo-router';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import MapView, { Callout, Marker } from 'react-native-maps';
+import MapView, { Callout, CalloutSubview, Marker } from 'react-native-maps';
+import { FACILITIES } from '../../constants/Facilities';
 
 export default function MapScreen() {
-  const facilities = [{
-    id: 1,
-    name: "LFC Cafeteria",
-    description: "Crowd info: yellow",
-    latitude: 42.248915,
-    longitude: -87.828119
-  }, {
-    id: 2,
-    name: "LFC Library",
-    description: "Crowd info: green",
-    latitude: 42.249493,
-    longitude: -87.827533
-  }, {
-    id: 3,
-    name: "LFC SRC",
-    description: "Crowd info: red",
-    latitude: 42.2442587706149,
-    longitude: -87.82802199260125
-  }];
+  const router = useRouter();
 
   return (
     <View style={styles.container}>
@@ -33,7 +17,7 @@ export default function MapScreen() {
           longitudeDelta: 0.01
         }}
       >
-        {facilities.map(facility => (
+        {FACILITIES.map(facility => (
           <Marker
             key={facility.id}
             coordinate={{
@@ -45,13 +29,14 @@ export default function MapScreen() {
               <View style={styles.box}>
                 <Text style={styles.title}>{facility.name}</Text>
                 <Text style={styles.description}>{facility.description}</Text>
-                <TouchableOpacity style={styles.button}>
-                  <Text style={styles.buttonText}>Detail</Text>
-                </TouchableOpacity>
+                <CalloutSubview onPress={() => router.push("/crowdInfo/crowdInfo")}>
+                  <TouchableOpacity style={styles.button}>
+                    <Text style={styles.buttonText}>Detail</Text>
+                  </TouchableOpacity>
+                </CalloutSubview>
               </View>
             </Callout>            
           </Marker>
-
         ))}
       </MapView>
     </View>
