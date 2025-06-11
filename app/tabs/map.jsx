@@ -10,7 +10,7 @@ export default function MapScreen() {
     <View style={styles.container}>
       <MapView
         style={styles.map}
-          initialRegion={{ // LFC Cafeteria
+        initialRegion={{ // LFC Cafeteria
           latitude: 42.248915,
           longitude: -87.828119,
           latitudeDelta: 0.01,
@@ -29,13 +29,13 @@ export default function MapScreen() {
               <View style={styles.box}>
                 <Text style={styles.title}>{facility.name}</Text>
                 <Text style={styles.description}>{facility.description}</Text>
-                <CalloutSubview onPress={() => router.push("/crowdInfo/crowdInfo")}>
+                <CalloutSubview onPress={() => router.push(`/crowdInfo/${facility.id}`)}>
                   <TouchableOpacity style={styles.button}>
                     <Text style={styles.buttonText}>Detail</Text>
                   </TouchableOpacity>
                 </CalloutSubview>
               </View>
-            </Callout>            
+            </Callout>
           </Marker>
         ))}
       </MapView>
@@ -46,7 +46,6 @@ export default function MapScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: -3,
   },
   map: {
     flex: 1,
