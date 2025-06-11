@@ -12,11 +12,11 @@ export default function RootLayout() {
           fontSize: 20,
           fontWeight: "bold"
         },
-        contentStyle: {
-          paddingHorizontal: 10,
-          paddingTop: 10,
-          backgroundColor: "#fff"
-        }
+        // contentStyle: {
+        //   paddingHorizontal: 10,
+        //   paddingTop: 10,
+        //   backgroundColor: "#fff"
+        // }
       }}>
       <Stack.Screen name="index" options={{title: ""}} />
       <Stack.Screen name="tabs" options={{headerShown: false, title: ""}} />
