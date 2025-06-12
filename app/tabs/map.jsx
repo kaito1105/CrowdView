@@ -1,25 +1,27 @@
 import { useRouter } from 'expo-router';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import MapView, { Callout, CalloutSubview, Marker } from 'react-native-maps';
+import MapView, { Callout, CalloutSubview, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { FACILITIES } from '../../constants/Facilities';
 
 export default function MapScreen() {
   const router = useRouter();
+  const INITIAL_REGION = { // LFC Cafeteria
+    latitude: 42.248915,
+    longitude: -87.828119,
+    latitudeDelta: 0.01,
+    longitudeDelta: 0.01
+  };
 
   return (
     <View style={styles.container}>
       <MapView
         style={styles.map}
-        initialRegion={{ // LFC Cafeteria
-          latitude: 42.248915,
-          longitude: -87.828119,
-          latitudeDelta: 0.01,
-          longitudeDelta: 0.01
-        }}
+        provider={PROVIDER_GOOGLE}
+        initialRegion={INITIAL_REGION}
       >
-        {FACILITIES.map(facility => (
+        {FACILITIES.map((facility, index) => (
           <Marker
-            key={facility.id}
+            key={index}
             coordinate={{
               latitude: facility.latitude,
               longitude: facility.longitude
@@ -29,7 +31,7 @@ export default function MapScreen() {
               <View style={styles.box}>
                 <Text style={styles.title}>{facility.name}</Text>
                 <Text style={styles.description}>{facility.description}</Text>
-                <CalloutSubview onPress={() => router.push(`/crowdInfo/${facility.id}`)}>
+                <CalloutSubview onPress={() => router.push(`/crowdInfo/${index}`)}>
                   <TouchableOpacity style={styles.button}>
                     <Text style={styles.buttonText}>Detail</Text>
                   </TouchableOpacity>
@@ -48,7 +50,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   map: {
-    flex: 1,
+    width: "100%",
+    height: "100%",
   },
   box: {
     flex: 1,
