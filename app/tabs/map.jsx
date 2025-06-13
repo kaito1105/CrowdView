@@ -14,6 +14,12 @@ export default function MapScreen() {
     longitudeDelta: 0.01
   };
 
+  const handleClick = () => {
+    setTimeout(() => {
+      mapRef.current?.animateToRegion(INITIAL_REGION, 500);
+    }, 500);
+  };
+
   return (
     <View style={styles.container}>
       <MapView
@@ -21,14 +27,9 @@ export default function MapScreen() {
         style={styles.map}
         provider={PROVIDER_GOOGLE}
         initialRegion={INITIAL_REGION}
-        // onRegionChangeComplete={() => {
-        //   setTimeout(() => {
-        //     mapRef.current?.animateToRegion(INITIAL_REGION, 500);
-        //   }, 500)
-        // }}
       >
-        <TouchableOpacity style={styles.resetButton}>
-          <Text>Reset</Text>
+        <TouchableOpacity style={styles.recenterButton} onPress={() => handleClick()}>
+          <Text style={styles.recenterText}>Recenter</Text>
         </TouchableOpacity>
         {FACILITIES.map(facility => (
           <Marker
@@ -37,6 +38,7 @@ export default function MapScreen() {
               latitude: facility.latitude,
               longitude: facility.longitude
             }}
+            pinColor={facility.color}
           >
             <Callout
               tooltip 
@@ -67,23 +69,27 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-  resetButton: {
+  recenterButton: {
     position: "absolute",
-    top: 100,
-    right: 50,
-    backgroundColor: "#fff",
+    top: 60,
+    right: 20,
+    backgroundColor: "#007bff",
     padding: 10,
     borderRadius: 5,
+  },
+  recenterText: {
+    fontWeight: "bold",
+    color: "#fff",
   },
   box: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#fff",
-    padding: 10,
+    padding: 15,
     borderRadius: 8,
-    minWidth: 130,
-    maxWidth: 200,
+    minWidth: 150,
+    // maxWidth: 200,
     elevation: 4, // shadow on Android
     shadowColor: "#000", // shadow on iOS
     shadowOffset: { width: 0, height: 2 },
@@ -91,14 +97,14 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
   },
   title: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 5,
   },
   description: {
     fontSize: 14,
-    marginBottom: 8,
+    marginBottom: 10,
   },
   button: {
     backgroundColor: "#007bff",
