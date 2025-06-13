@@ -1,19 +1,22 @@
 export const FACILITIES = [{
-    id: 1,
+    id: "Cafeteria",
     name: "LFC Cafeteria",
     description: "Crowd info: yellow",
+    color: "gold",
     latitude: 42.248915,
     longitude: -87.828119
   }, {
-    id: 2,
+    id: "Library",
     name: "LFC Library",
     description: "Crowd info: green",
-    latitude: 42.249493,
-    longitude: -87.827533
+    color: "green",
+    latitude: 42.24953384054592,
+    longitude: -87.82755760166695,
   }, {
-    id: 3,
+    id: "SRC",
     name: "LFC SRC",
     description: "Crowd info: red",
-    latitude: 42.2442587706149,
-    longitude: -87.82802199260125
+    color: "tomato",
+    latitude: 42.2442420304945,
+    longitude: -87.82799785248999,
   }];
