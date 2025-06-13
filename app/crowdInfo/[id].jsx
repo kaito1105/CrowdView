@@ -4,7 +4,7 @@ import { FACILITIES } from "../../constants/Facilities";
 
 export default function CrowdInfoScreen() {
   const {id} = useLocalSearchParams();
-  const facility = FACILITIES.find(f => f.id.toString() === id);
+  const facility = FACILITIES.find(f => f.id === id);
 
   return (
     <View style={styles.container}>

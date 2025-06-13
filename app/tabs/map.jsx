@@ -1,9 +1,11 @@
 import { useRouter } from 'expo-router';
+import { useRef } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import MapView, { Callout, CalloutSubview, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { Callout, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { FACILITIES } from '../../constants/Facilities';
 
 export default function MapScreen() {
+  const mapRef = useRef(null);
   const router = useRouter();
   const INITIAL_REGION = { // LFC Cafeteria
     latitude: 42.248915,
@@ -15,27 +17,39 @@ export default function MapScreen() {
   return (
     <View style={styles.container}>
       <MapView
+        ref={mapRef}
         style={styles.map}
         provider={PROVIDER_GOOGLE}
         initialRegion={INITIAL_REGION}
+        // onRegionChangeComplete={() => {
+        //   setTimeout(() => {
+        //     mapRef.current?.animateToRegion(INITIAL_REGION, 500);
+        //   }, 500)
+        // }}
       >
-        {FACILITIES.map((facility, index) => (
+        <TouchableOpacity style={styles.resetButton}>
+          <Text>Reset</Text>
+        </TouchableOpacity>
+        {FACILITIES.map(facility => (
           <Marker
-            key={index}
+            key={facility.id}
             coordinate={{
               latitude: facility.latitude,
               longitude: facility.longitude
             }}
           >
-            <Callout tooltip>
+            <Callout
+              tooltip 
+              onPress={() => {
+                  router.push(`/crowdInfo/${facility.id}`);
+              }}
+            >
               <View style={styles.box}>
                 <Text style={styles.title}>{facility.name}</Text>
                 <Text style={styles.description}>{facility.description}</Text>
-                <CalloutSubview onPress={() => router.push(`/crowdInfo/${index}`)}>
-                  <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}>Detail</Text>
-                  </TouchableOpacity>
-                </CalloutSubview>
+                <TouchableOpacity style={styles.button}>
+                  <Text style={styles.buttonText}>Detail</Text>
+                </TouchableOpacity>
               </View>
             </Callout>
           </Marker>
@@ -53,6 +67,14 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
+  resetButton: {
+    position: "absolute",
+    top: 100,
+    right: 50,
+    backgroundColor: "#fff",
+    padding: 10,
+    borderRadius: 5,
+  },
   box: {
     flex: 1,
     justifyContent: "center",
@@ -65,8 +87,8 @@ const styles = StyleSheet.create({
     elevation: 4, // shadow on Android
     shadowColor: "#000", // shadow on iOS
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
   },
   title: {
     fontSize: 16,
