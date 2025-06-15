@@ -1,6 +1,7 @@
 import { useLocalSearchParams } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
 import { FACILITIES } from "../../constants/Facilities";
+import UseLocation from "../../hooks/useLocation";
 
 export default function CrowdInfoScreen() {
   const {id} = useLocalSearchParams();
@@ -12,8 +13,9 @@ export default function CrowdInfoScreen() {
         <View>
           <Text style={styles.title}>{facility.name}</Text>
           <Text style={styles.crowdInfo}>Crowd info: </Text>
-          <Text style={styles.vote}>Vote</Text>
-          <Text style={styles.comment}>Comment</Text>
+          <Text style={styles.vote}>Vote:</Text>
+          <Text style={styles.comment}>Comment:</Text>
+          <UseLocation facilityLat={facility.latitude} facilityLong={facility.longitude}/>
         </View>
       ) : (
         <Text>Facility not found.</Text>
@@ -33,5 +35,17 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 10,
-  }
+  },
+  crowdInfo: {
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+  vote: {
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+  comment: {
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
 });
