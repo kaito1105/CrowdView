@@ -19,4 +19,11 @@ export const FACILITIES = [{
     color: "tomato",
     latitude: 42.2442420304945,
     longitude: -87.82799785248999,
+  }, {
+    id: "Boomers",
+    name: "LFC Boomers",
+    description: "Crowd info: green",
+    color: "green",
+    latitude: 42.24875432809444,
+    longitude: -87.82767711519685,
   }];
