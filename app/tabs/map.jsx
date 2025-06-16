@@ -35,8 +35,8 @@ export default function MapScreen() {
           <Marker
             key={facility.id}
             coordinate={{
-              latitude: facility.latitude,
-              longitude: facility.longitude
+              latitude: facility.center.latitude,
+              longitude: facility.center.longitude
             }}
             pinColor={facility.color}
           >
