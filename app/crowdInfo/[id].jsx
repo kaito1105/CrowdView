@@ -15,7 +15,7 @@ export default function CrowdInfoScreen() {
           <Text style={styles.crowdInfo}>Crowd info: </Text>
           <Text style={styles.vote}>Vote:</Text>
           <Text style={styles.comment}>Comment:</Text>
-          <UseLocation facilityLat={facility.latitude} facilityLong={facility.longitude}/>
+          <UseLocation centerCoords={facility.center} edgeCoords={facility.edge}/>
         </View>
       ) : (
         <Text>Facility not found.</Text>

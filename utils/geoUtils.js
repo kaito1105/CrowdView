@@ -1,17 +1,34 @@
-function calculateRadius(center, edge) {
-  const x_center = Math.abs(center.longitude);
-  const y_center = Math.abs(center.latitude);
-  const x = Math.abs(edge.longitude);
-  const y = Math.abs(edge.latitude);
-  const r = Math.sqrt((x_center - x)**2 + (y_center - y)**2);
+function getDistanceFromLatLonInMeters(lat1, lon1, lat2, lon2) {
+  const R = 6371000; // Radius of Earth in meters
+  const dLat = deg2rad(lat2 - lat1);
+  const dLon = deg2rad(lon2 - lon1);
+  const a = Math.sin(dLat / 2) ** 2 + 
+            Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) ** 2;
 
-  return r;
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
 }
 
-export default function checkLocation(center, edge, current) {
-  const r = calculateRadius(center, edge);
-  const x = current.longitude;
-  const y = current.latitude;
+function deg2rad(deg) {
+  return deg * (Math.PI / 180);
+}
 
-  return (x**2 + y**2) < r**2;
+export default function checkLocation(centerCoords, edgeCoords, currentCoords) {
+  // Use center and edge to define radius
+  const radius = getDistanceFromLatLonInMeters(
+    centerCoords.latitude,
+    centerCoords.longitude,
+    edgeCoords.latitude,
+    edgeCoords.longitude
+  );
+
+  // Get distance from center to current user location
+  const distanceToUser = getDistanceFromLatLonInMeters(
+    centerCoords.latitude,
+    centerCoords.longitude,
+    currentCoords.latitude,
+    currentCoords.longitude
+  );
+
+  return distanceToUser <= radius;
 }
