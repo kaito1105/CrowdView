@@ -10,7 +10,9 @@ export default function ListScreen() {
     {FACILITIES.map(facility => (
       <View key={facility.id} style={styles.box}>
         <Text style={styles.title}>{facility.name}</Text>
-        <Text style={styles.description}>{facility.description}</Text>
+        <Text style={[styles.description, { color: facility.color }]}>
+          {`Crowd info: ${facility.description}`}
+        </Text>
         <TouchableOpacity style={styles.button} onPress={() => router.push(`/crowdInfo/${facility.id}`)}>
           <Text style={styles.buttonText}>Detail</Text>
         </TouchableOpacity>
@@ -40,6 +42,7 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 14,
+    fontWeight: "bold",
     marginBottom: 10,
   },
   button: {
