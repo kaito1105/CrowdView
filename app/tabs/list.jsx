@@ -11,7 +11,7 @@ export default function ListScreen() {
       <View key={facility.id} style={styles.box}>
         <Text style={styles.title}>{facility.name}</Text>
         <Text style={[styles.description, { color: facility.color }]}>
-          {`Crowd info: ${facility.description}`}
+          {`Crowd level: ${facility.description}`}
         </Text>
         <TouchableOpacity style={styles.button} onPress={() => router.push(`/crowdInfo/${facility.id}`)}>
           <Text style={styles.buttonText}>Detail</Text>
