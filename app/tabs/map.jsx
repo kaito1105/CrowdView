@@ -50,7 +50,7 @@ export default function MapScreen() {
                 <Text style={styles.title}>{facility.name}</Text>
                 <Text style={styles.description}>{`Crowd level: ${facility.description}`}</Text>
                 <TouchableOpacity style={styles.button}>
-                  <Text style={styles.buttonText}>Detail</Text>
+                  <Text style={styles.buttonText}>Details</Text>
                 </TouchableOpacity>
               </View>
             </Callout>

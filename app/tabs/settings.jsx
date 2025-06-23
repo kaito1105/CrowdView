@@ -3,11 +3,11 @@ import { StyleSheet, Text, View } from "react-native";
 export default function SettingsScreen() {
   return (
     <View style={styles.container}>
-      <Text>Account</Text>
-      <Text>(username)</Text>
-      <Text>(email)</Text>
-      <Text>(Change your password)</Text>
-      <Text>(Delete your account)</Text>
+      <Text>Name</Text>
+      <Text>email</Text>
+      <Text>Change your password</Text>
+      <Text>Light/Dark</Text>
+      <Text>Terms of Use?</Text>
       <Text>Logout</Text>
     </View>
   );

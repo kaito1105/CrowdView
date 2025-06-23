@@ -1,8 +1,8 @@
 export const FACILITIES = [{
     id: "Cafeteria",
     name: "LFC Cafeteria",
-    description: "yellow",
-    color: "gold",
+    description: "mid",
+    color: "orange",
     center: {
       latitude: 42.2489473333388, 
       longitude: -87.82813970120232
@@ -14,7 +14,7 @@ export const FACILITIES = [{
   }, {
     id: "Library",
     name: "LFC Library",
-    description: "green",
+    description: "low",
     color: "green",
     center: {
       latitude: 42.24953384054592,
@@ -27,7 +27,7 @@ export const FACILITIES = [{
   }, {
     id: "SRC",
     name: "LFC SRC",
-    description: "red",
+    description: "high",
     color: "tomato",
     center: {
       latitude: 42.2442420304945,
@@ -40,7 +40,7 @@ export const FACILITIES = [{
   }, {
     id: "Boomers",
     name: "LFC Boomers",
-    description: "green",
+    description: "low",
     color: "green",
     center: {
       latitude: 42.24875432809444,

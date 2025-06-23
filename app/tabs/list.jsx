@@ -1,39 +1,84 @@
 import { useRouter } from "expo-router";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { FACILITIES } from "../../constants/Facilities";
 
 export default function ListScreen() {
   const router = useRouter();
 
+  const getColorByCrowdLevel = (level) => {
+    switch (level) {
+      case "high":
+        return "tomato";
+      case "mid":
+        return "orange";
+      case "low":
+        return "green";
+      default:
+        return "gray";
+    }
+  };
+
+  const getEmojiByCrowdLevel = (level) => {
+    switch (level) {
+      case "high":
+        return "😫";
+      case "mid":
+        return "😐";
+      case "low":
+        return "😊";
+    }
+  };
+
   return (
-    <View style={styles.container}>
-    {FACILITIES.map(facility => (
-      <View key={facility.id} style={styles.box}>
-        <Text style={styles.title}>{facility.name}</Text>
-        <Text style={[styles.description, { color: facility.color }]}>
-          {`Crowd level: ${facility.description}`}
-        </Text>
-        <TouchableOpacity style={styles.button} onPress={() => router.push(`/crowdInfo/${facility.id}`)}>
-          <Text style={styles.buttonText}>Detail</Text>
-        </TouchableOpacity>
-      </View>
-    ))}
+    <View style={styles.background}>
+      <ScrollView style={styles.container}>
+      {FACILITIES.map(facility => (
+        <View key={facility.id} style={styles.box}>
+          <TouchableOpacity style={styles.button} onPress={() => router.push(`/crowdInfo/${facility.id}`)}>
+            <Text style={styles.buttonText}>Details</Text>
+          </TouchableOpacity>
+          <Text style={styles.title}>
+            {facility.name}
+          </Text>
+          <Text style={styles.description}>
+            Crowd level:{" "}
+            <Text style={{fontWeight: "bold", color: getColorByCrowdLevel(facility.description)}}>
+              {`${facility.description} ${getEmojiByCrowdLevel(facility.description)}`}
+            </Text>
+          </Text>
+        </View>
+      ))}
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1, 
+    backgroundColor: "#007bff",
+  },
   container: {
     flex: 1,
     marginTop: 80,
+    borderTopColor: "gray",
+    borderTopWidth: 1,
+    backgroundColor: "#fff",
   },
   box: {
-    // flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#fff",
-    padding: 10,
-    marginBottom: 50,
+    padding: 20,
+    borderBottomColor: "gray",
+    borderBottomWidth: 1,
+  },
+  button: {
+    position: "absolute",
+    top: 24,
+    right: 20,
+    zIndex: 999,
+  },
+  buttonText: {
+    fontSize: 16,
+    textDecorationLine: "underline",
   },
   title: {
     fontWeight: "bold",
@@ -41,18 +86,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   description: {
-    fontSize: 14,
-    fontWeight: "bold",
-    marginBottom: 10,
+    fontSize: 16,
   },
-  button: {
-    backgroundColor: "#007bff",
-    paddingVertical: 6,
-    paddingHorizontal: 20,
-    borderRadius: 4,
-  },
-  buttonText: {
-    fontWeight: "bold",
-    color: "#fff",
-  }
 });
