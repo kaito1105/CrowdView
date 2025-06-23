@@ -56,14 +56,15 @@ export default function ListScreen() {
 const styles = StyleSheet.create({
   background: {
     flex: 1, 
-    backgroundColor: "#007bff",
+    // backgroundColor: "#007bff",
+    backgroundColor: "#fff",
   },
   container: {
     flex: 1,
-    marginTop: 80,
+    marginTop: 90,
     borderTopColor: "gray",
     borderTopWidth: 1,
-    backgroundColor: "#fff",
+    // backgroundColor: "#fff",
   },
   box: {
     padding: 20,
