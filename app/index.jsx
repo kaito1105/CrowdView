@@ -6,10 +6,16 @@ export default function Index() {
 
   return (
     <View style={styles.container}>
-      {/* <Image source={IconImage} style={styles.image}/> */}
-      <Text style={styles.title}>Welcome to CrowdView App!</Text>
-      <Text style={styles.description}>Capture real-time crowd info at LFC</Text>
-      <TouchableOpacity style={styles.button} onPress={() => router.push("/tabs")}>
+      <Text style={styles.title}>
+        Welcome to CrowdView App!
+      </Text>
+      <Text style={styles.description}>
+        Capture real-time crowd info at LFC
+      </Text>
+      <TouchableOpacity 
+        style={styles.button} 
+        onPress={() => router.push("/tabs")}
+      >
         <Text style={styles.buttonText}>Get Started</Text>
       </TouchableOpacity>
     </View>

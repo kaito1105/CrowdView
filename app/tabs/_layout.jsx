@@ -12,21 +12,24 @@ export default function TabLayout() {
         name="map"
         options={{
           title: 'Map',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="pin" color={color} />,
+          tabBarIcon: ({ color }) => 
+            <IconSymbol size={28} name="pin" color={color} />
         }}
       />
       <Tabs.Screen
         name="list"
         options={{
           title: 'List',
-          tabBarIcon: ({ color }) => <IconSymbol size={32} name="menucard" color={color} />,
+          tabBarIcon: ({ color }) => 
+            <IconSymbol size={32} name="menucard" color={color} />
         }}
       />
       <Tabs.Screen
         name="settings"
         options={{
           title: 'Settings',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="gear" color={color} />,
+          tabBarIcon: ({ color }) => 
+            <IconSymbol size={28} name="gear" color={color} />
         }}
       />
     </Tabs>

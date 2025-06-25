@@ -1,6 +1,6 @@
+import { FACILITIES } from "@/constants/Facilities";
 import { useRouter } from "expo-router";
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { FACILITIES } from "../../constants/Facilities";
 
 export default function ListScreen() {
   const router = useRouter();
@@ -30,46 +30,44 @@ export default function ListScreen() {
   };
 
   return (
-    <View style={styles.background}>
-      <ScrollView style={styles.container}>
-      {FACILITIES.map(facility => (
-        <View key={facility.id} style={styles.box}>
-          <TouchableOpacity style={styles.button} onPress={() => router.push(`/crowdInfo/${facility.id}`)}>
-            <Text style={styles.buttonText}>Details</Text>
-          </TouchableOpacity>
-          <Text style={styles.title}>
-            {facility.name}
+    <ScrollView style={styles.container}>
+    {FACILITIES.map(facility => (
+      <View key={facility.id} style={styles.box}>
+        <TouchableOpacity 
+          style={styles.button} 
+          onPress={() => router.push(`/crowdInfo/${facility.id}`)}
+        >
+          <Text style={styles.buttonText}>Details</Text>
+        </TouchableOpacity>
+        <Text style={styles.title}>
+          {facility.name}
+        </Text>
+        <Text style={styles.description}>
+          Crowd level:{" "}
+          <Text 
+            style={{
+              fontWeight: "bold", 
+              color: getColorByCrowdLevel(facility.description),
+              }}
+          >
+            {`${facility.description} ${getEmojiByCrowdLevel(facility.description)}`}
           </Text>
-          <Text style={styles.description}>
-            Crowd level:{" "}
-            <Text style={{fontWeight: "bold", color: getColorByCrowdLevel(facility.description)}}>
-              {`${facility.description} ${getEmojiByCrowdLevel(facility.description)}`}
-            </Text>
-          </Text>
-        </View>
-      ))}
-      </ScrollView>
-    </View>
+        </Text>
+      </View>
+    ))}
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1, 
-    // backgroundColor: "#007bff",
-    backgroundColor: "#fff",
-  },
   container: {
     flex: 1,
-    marginTop: 90,
-    borderTopColor: "gray",
-    borderTopWidth: 1,
-    // backgroundColor: "#fff",
+    backgroundColor: "#fff",
   },
   box: {
     padding: 20,
-    borderBottomColor: "gray",
     borderBottomWidth: 1,
+    borderColor: "#ccc",
   },
   button: {
     position: "absolute",

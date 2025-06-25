@@ -1,8 +1,8 @@
+import { FACILITIES } from "@/constants/Facilities";
 import { useRouter } from 'expo-router';
 import { useRef } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import MapView, { Callout, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-import { FACILITIES } from '../../constants/Facilities';
 
 export default function MapScreen() {
   const mapRef = useRef(null);
@@ -28,7 +28,10 @@ export default function MapScreen() {
         provider={PROVIDER_GOOGLE}
         initialRegion={INITIAL_REGION}
       >
-        <TouchableOpacity style={styles.recenterButton} onPress={() => handleClick()}>
+        <TouchableOpacity 
+          style={styles.recenterButton} 
+          onPress={() => handleClick()}
+        >
           <Text style={styles.recenterText}>Recenter</Text>
         </TouchableOpacity>
         {FACILITIES.map(facility => (
@@ -42,13 +45,13 @@ export default function MapScreen() {
           >
             <Callout
               tooltip 
-              onPress={() => {
-                  router.push(`/crowdInfo/${facility.id}`);
-              }}
+              onPress={() => router.push(`/crowdInfo/${facility.id}`)}
             >
               <View style={styles.box}>
                 <Text style={styles.title}>{facility.name}</Text>
-                <Text style={styles.description}>{`Crowd level: ${facility.description}`}</Text>
+                <Text style={styles.description}>
+                  {`Crowd level: ${facility.description}`}
+                </Text>
                 <TouchableOpacity style={styles.button}>
                   <Text style={styles.buttonText}>Details</Text>
                 </TouchableOpacity>
@@ -71,7 +74,7 @@ const styles = StyleSheet.create({
   },
   recenterButton: {
     position: "absolute",
-    top: 60,
+    top: 30,
     right: 20,
     backgroundColor: "#007bff",
     padding: 10,
