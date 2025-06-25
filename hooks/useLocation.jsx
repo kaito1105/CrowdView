@@ -33,14 +33,19 @@ export default function UseLocation({ centerCoords, edgeCoords }) {
       <Text style={styles.title}>Your Location:</Text>
       <Text style={styles.coords}>
         {errorMsg ? errorMsg :
-          location ? `Latitude: ${location.latitude}\nLongitude: ${location.longitude}\nTime: ${time}` :
+          location ? 
+            `Latitude: ${location.latitude}\nLongitude: ${location.longitude}\nTime: ${time}` :
             "Getting location..."
         }
       </Text>
       {checkLocation(centerCoords, edgeCoords, location) ? (
-        <Text style={styles.info}>You are currently inside this facility.</Text>
+        <Text style={styles.info}>
+          You are currently inside this facility.
+        </Text>
       ) : (
-        <Text style={styles.info}>You aren't currently inside this facility.</Text>
+        <Text style={styles.info}>
+          You aren't currently inside this facility.
+        </Text>
       )}
     </View>
   );

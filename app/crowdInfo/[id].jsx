@@ -12,10 +12,13 @@ export default function CrowdInfoScreen() {
       {facility ? (
         <View>
           <Text style={styles.title}>{facility.name}</Text>
-          <Text style={styles.crowdInfo}>Crowd info: </Text>
+          <Text style={styles.crowdInfo}>Crowd level: </Text>
           <Text style={styles.vote}>Vote:</Text>
           <Text style={styles.comment}>Comment:</Text>
-          <UseLocation centerCoords={facility.center} edgeCoords={facility.edge}/>
+          <UseLocation 
+            centerCoords={facility.center} 
+            edgeCoords={facility.edge}
+          />
         </View>
       ) : (
         <Text>Facility not found.</Text>
