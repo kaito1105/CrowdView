@@ -3,19 +3,15 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function Index() {
   const router = useRouter();
+  const handleStart = () => router.push("/tabs");
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
-        Welcome to CrowdView App!
-      </Text>
+      <Text style={styles.title}>Welcome to CrowdView App!</Text>
       <Text style={styles.description}>
         Capture real-time crowd info at LFC
       </Text>
-      <TouchableOpacity 
-        style={styles.button} 
-        onPress={() => router.push("/tabs")}
-      >
+      <TouchableOpacity style={styles.button} onPress={handleStart}>
         <Text style={styles.buttonText}>Get Started</Text>
       </TouchableOpacity>
     </View>
@@ -29,13 +25,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 20,
     backgroundColor: "#fff"
-  },
-  image: {
-    width: 180,
-    height: 180,
-    marginTop: 130,
-    marginBottom: 50,
-    borderRadius: 10
   },
   title: {
     fontSize: 24,
