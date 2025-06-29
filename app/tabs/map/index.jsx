@@ -1,5 +1,6 @@
 import FacilityMarker from "@/components/FacilityMarker";
 import { FACILITIES } from "@/constants/Facilities";
+import { INITIAL_REGION } from "@/constants/Region";
 import { useRouter } from 'expo-router';
 import { useRef } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
@@ -8,13 +9,7 @@ import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 export default function MapScreen() {
   const mapRef = useRef(null);
   const router = useRouter();
-  const INITIAL_REGION = { // LFC Cafeteria
-    latitude: 42.248915,
-    longitude: -87.828119,
-    latitudeDelta: 0.01,
-    longitudeDelta: 0.01
-  };
-
+  
   const handleRecenter = () => {
     if (mapRef.current) {
       mapRef.current.animateToRegion(INITIAL_REGION, 500);
@@ -31,12 +26,6 @@ export default function MapScreen() {
         provider={PROVIDER_GOOGLE}
         initialRegion={INITIAL_REGION}
       >
-        <TouchableOpacity 
-          style={styles.recenterButton} 
-          onPress={() => handleRecenter()}
-        >
-          <Text style={styles.recenterText}>Recenter</Text>
-        </TouchableOpacity>
         {FACILITIES.map(facility => (
           <FacilityMarker 
             key={facility.id} 
@@ -45,6 +34,12 @@ export default function MapScreen() {
           />
         ))}
       </MapView>
+      <TouchableOpacity 
+        style={styles.recenterButton} 
+        onPress={() => handleRecenter()}
+      >
+        <Text style={styles.recenterText}>Recenter</Text>
+      </TouchableOpacity>
     </View>
   );
 }

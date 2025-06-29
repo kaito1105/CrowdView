@@ -1,7 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Callout, Marker } from 'react-native-maps';
 
-
 export default function FacilityMarker({ facility, onPress}) {
 
   return (
