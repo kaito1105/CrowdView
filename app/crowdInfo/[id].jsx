@@ -1,8 +1,8 @@
-import Comments from "@/components/Comments";
 import { FACILITIES } from "@/constants/Facilities";
 import UseLocation from "@/hooks/useLocation";
 import { useLocalSearchParams } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
+import Comments from "./sections/Comments";
 
 export default function CrowdInfoScreen() {
   const {id} = useLocalSearchParams();

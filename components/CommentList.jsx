@@ -1,0 +1,117 @@
+import ProfileImage from "@/assets/images/profile_temp.jpg";
+import {
+  FlatList,
+  Image,
+  Modal,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from "react-native";
+
+export default function CommentList({ 
+  comments, 
+  allCommentsVisible, 
+  setAllCommentsVisible 
+}) {
+  const smallScreenRenderItem = ({ item }) => (
+    <TouchableOpacity onPress={() => setAllCommentsVisible(true)}>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Image source={ProfileImage} style={styles.profileImage} />
+          <Text style={styles.name}>Name</Text>
+        </View>
+        <Text style={styles.comments}>{item.text}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+
+  const fullScreenRenderItem = ({ item }) => (
+    <View style={styles.modalComment}>
+      <View style={styles.header}>
+        <Image source={ProfileImage} style={styles.profileImage} />
+        <Text style={styles.name}>Name</Text>
+      </View>
+      <Text style={styles.comments}>{item.text}</Text>
+    </View>
+  );
+
+  return (
+    <>
+      {/* Render compact view */}
+      <FlatList
+        data={comments}
+        keyExtractor={(item) => item.id}
+        renderItem={smallScreenRenderItem}
+      />
+
+      {/* Fullscreen Modal */}
+      <Modal
+        visible={allCommentsVisible}
+        animationType="slide"
+        transparent
+        onRequestClose={() => setAllCommentsVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <Text style={styles.modalTitle}>All Comments</Text>
+          <FlatList
+            data={comments}
+            keyExtractor={(item) => item.id}
+            renderItem={fullScreenRenderItem}
+          />
+          <TouchableOpacity onPress={() => setAllCommentsVisible(false)}>
+            <Text style={styles.closeText}>Close</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
+    </>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    marginBottom: 10,
+    backgroundColor: "#fff",
+  },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 4,
+  },
+  profileImage: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    marginRight: 10,
+  },
+  name: {
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  comments: {
+    padding: 4,
+    fontSize: 14,
+    color: "#333",
+  },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: "rgba(255, 255, 255, 0.9)",
+    padding: 20,
+    paddingTop: 50,
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 10,
+    textAlign: "center",
+  },
+  modalComment: {
+    marginBottom: 15,
+  },
+  closeText: {
+    color: "#007bff",
+    textAlign: "center",
+    marginBottom: 20,
+    fontSize: 18,
+  },
+});
