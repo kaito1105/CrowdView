@@ -14,7 +14,7 @@ export default function Header({hasBack, title=""}) {
           <Text style={styles.backText}>{"<  Back"}</Text>
         </TouchableOpacity>
       )}
-      <Text style={{ fontSize: 24, fontWeight: "bold" }}>{title}</Text>
+      <Text style={styles.title}>{title}</Text>
     </View>
   )
 };
@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     height: 120,
     backgroundColor: "#fff",
     justifyContent: "flex-end",
-    paddingBottom: 16,
     alignItems: "center",
     borderBottomWidth: 1,
     borderColor: "#ccc",
@@ -41,6 +40,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "bold",
-    textAlign: "center",
+    paddingBottom: 16,
   }
 });
