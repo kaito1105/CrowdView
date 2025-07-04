@@ -1,13 +1,72 @@
 import CameraImage from "@/assets/images/camera.jpg";
 import ProfileImage from "@/assets/images/profile_temp.jpg";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import * as ImagePicker from "expo-image-picker";
+import { useState } from "react";
+import { Alert, Image, Linking, Platform, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function SettingsScreen() {
+  const [image, setImage] = useState<string | null>(null);
+  const [mediaLibraryPermission, requestMediaLibraryPermission] = ImagePicker.useMediaLibraryPermissions();
+  const [cameraPermission, requestCameraPermission] = ImagePicker.useCameraPermissions();
+
+  // const requestPermissions = async () => {
+  //   const libraryGranted = mediaLibraryPermission?.granted
+  //     ? true
+  //     : (await requestMediaLibraryPermission()).granted;
+  //   const cameraGranted = cameraPermission?.granted
+  //     ? true
+  //     : (await requestCameraPermission()).granted;
+  //   return libraryGranted && cameraGranted;
+  // };
+
+  const pickImage = async () => {
+    try {
+      if (Platform.OS !== "web") {
+        if (mediaLibraryPermission?.status !== "granted") {
+          const permissionResponse = await requestMediaLibraryPermission();
+          if (permissionResponse.status !== "granted") {
+            Alert.alert(
+              "Permission not granted", 
+              "Please allow access to your photo library to select an image.",
+              [
+                { text: "Cancel" }, 
+                {
+                  text: "Open Settings",
+                  onPress: () =>
+                    Platform.OS === "ios" 
+                      ? Linking.openURL("app-settings:") 
+                      : Linking.openSettings(),
+                },
+              ]
+            );
+            return;
+          }
+        }
+      }
+
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: "images",
+        allowsEditing: true,
+        aspect: [4, 4],
+        quality: 1,
+        base64: true,
+      });
+
+      if (!result.canceled) {
+        setImage(result.assets[0].uri);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <View style={styles.container}>
-      <Image source={ProfileImage} style={styles.profileImage} />
-      <TouchableOpacity>
+      <Image
+        source={image ? { uri: image } : ProfileImage}
+        style={styles.profileImage}
+      />
+      <TouchableOpacity onPress={pickImage}>
         <Image source={CameraImage} style={styles.cameraImage} />
       </TouchableOpacity>
 
@@ -21,7 +80,7 @@ export default function SettingsScreen() {
         <Text>Light/Dark</Text>
         <Text>Terms of Use?</Text>
         <Text>Logout</Text>
-        </View>
+      </View>
     </View>
   );
 }
