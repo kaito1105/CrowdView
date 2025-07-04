@@ -7,13 +7,21 @@ import {
   View,
 } from "react-native";
 
+type AddCommentModalProps = {
+  newCommentVisible: boolean;
+  setNewCommentVisible: (visible: boolean) => void;
+  newComment: string;
+  setNewComment: (text: string) => void;
+  addComment: () => void;
+}
+
 export default function AddCommentModal({
   newCommentVisible, 
   setNewCommentVisible, 
   newComment, 
   setNewComment, 
   addComment,
-}) {
+}: AddCommentModalProps) {
   return (
     <Modal
       visible={newCommentVisible}

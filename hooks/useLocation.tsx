@@ -1,24 +1,29 @@
+import checkLocation, { Coordinates } from "@/utils/geoUtils";
 import * as Location from "expo-location";
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import checkLocation from "../utils/geoUtils";
 
-export default function UseLocation({ centerCoords, edgeCoords }) {
-  const [location, setLocation] = useState("");
-  const [time, setTime] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
+interface Props {
+  centerCoords: Coordinates;
+  edgeCoords: Coordinates;
+};
+
+export default function UseLocation({ centerCoords, edgeCoords }: Props) {
+  const [location, setLocation] = useState<Coordinates | null>(null);
+  const [time, setTime] = useState<string | null>(null);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   useEffect(() => {
     let intervalId;
 
     async function getCurrentLocation() {
-      let { status } = await Location.requestForegroundPermissionsAsync();
+      const { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
         setErrorMsg("Permission to access location was denied");
         return;
       }
 
-      let location = await Location.getCurrentPositionAsync({});
+      const location = await Location.getCurrentPositionAsync({});
       setLocation(location.coords);
       setTime(new Date(location.timestamp).toLocaleString());
     }

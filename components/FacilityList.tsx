@@ -1,6 +1,12 @@
+import { Facility } from "@/constants/Facilities";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-const getColorByCrowdLevel = (level) => {
+type Props = {
+  facility: Facility;
+  onPress: (id: string) => void;
+};
+
+const getColorByCrowdLevel = (level: string): string => {
   switch (level) {
     case "high":
       return "tomato";
@@ -13,7 +19,7 @@ const getColorByCrowdLevel = (level) => {
   }
 };
 
-const getEmojiByCrowdLevel = (level) => {
+const getEmojiByCrowdLevel = (level: string): string => {
   switch (level) {
     case "high":
       return "😫";
@@ -26,7 +32,7 @@ const getEmojiByCrowdLevel = (level) => {
   }
 };
 
-export default function FacilityList({ facility, onPress }) {
+export default function FacilityList({ facility, onPress }: Props) {
   return (
     <View style={styles.box}>
       <TouchableOpacity 
@@ -38,9 +44,10 @@ export default function FacilityList({ facility, onPress }) {
       <Text style={styles.title}>{facility.name}</Text>
       <Text style={styles.description}>
         Crowd level:{" "}
-        <Text style={{
-          fontWeight: "bold", 
-          color: getColorByCrowdLevel(facility.description),
+        <Text 
+          style={{
+            fontWeight: "bold", 
+            color: getColorByCrowdLevel(facility.description),
           }}
         >
           {`${facility.description} ${getEmojiByCrowdLevel(facility.description)}`}

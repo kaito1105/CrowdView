@@ -1,7 +1,12 @@
 import { useRouter } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-export default function Header({hasBack, title=""}) {
+type HeaderProps = {
+  hasBack: boolean;
+  title?: string;
+};
+
+export default function Header({hasBack, title=""}: HeaderProps) {
   const router = useRouter();
 
   return (

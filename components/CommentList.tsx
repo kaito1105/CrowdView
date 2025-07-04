@@ -2,6 +2,7 @@ import ProfileImage from "@/assets/images/profile_temp.jpg";
 import {
   FlatList,
   Image,
+  ListRenderItem,
   Modal,
   StyleSheet,
   Text,
@@ -9,12 +10,23 @@ import {
   View
 } from "react-native";
 
+type Comment = {
+  id: string;
+  text: string;
+};
+
+type Props = {
+  comments: Comment[];
+  allCommentsVisible: boolean;
+  setAllCommentsVisible: (visible: boolean) => void;
+};
+
 export default function CommentList({ 
   comments, 
   allCommentsVisible, 
   setAllCommentsVisible 
-}) {
-  const smallScreenRenderItem = ({ item }) => (
+}: Props) {
+  const smallScreenRenderItem: ListRenderItem<Comment> = ({ item }) => (
     <TouchableOpacity onPress={() => setAllCommentsVisible(true)}>
       <View style={styles.container}>
         <View style={styles.header}>
@@ -26,7 +38,7 @@ export default function CommentList({
     </TouchableOpacity>
   );
 
-  const fullScreenRenderItem = ({ item }) => (
+  const fullScreenRenderItem: ListRenderItem<Comment> = ({ item }) => (
     <View style={styles.modalComment}>
       <View style={styles.header}>
         <Image source={ProfileImage} style={styles.profileImage} />
@@ -38,14 +50,12 @@ export default function CommentList({
 
   return (
     <>
-      {/* Render compact view */}
       <FlatList
         data={comments}
         keyExtractor={(item) => item.id}
         renderItem={smallScreenRenderItem}
       />
 
-      {/* Fullscreen Modal */}
       <Modal
         visible={allCommentsVisible}
         animationType="slide"

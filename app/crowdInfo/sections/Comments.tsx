@@ -8,13 +8,18 @@ import {
   View
 } from "react-native";
 
-export default function Comments() {
-  const [comments, setComments] = useState([]);
-  const [newCommentVisible, setNewCommentVisible] = useState(false);
-  const [newComment, setNewComment] = useState("");
-  const [allCommentsVisible, setAllCommentsVisible] = useState(false);
+type Comment = {
+  id: string;
+  text: string;
+};
 
-  const addComment = () => {
+export default function Comments() {
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [newCommentVisible, setNewCommentVisible] = useState<boolean>(false);
+  const [newComment, setNewComment] = useState<string>("");
+  const [allCommentsVisible, setAllCommentsVisible] = useState<boolean>(false);
+
+  const addComment = (): void => {
     if (newComment.trim() === "") return;
 
     setComments((prev) => [
