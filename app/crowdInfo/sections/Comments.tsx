@@ -1,5 +1,5 @@
 import AddCommentModal from "@/components/AddCommentModal";
-import CommentList from "@/components/CommentList";
+import CommentList, { Comment } from "@/components/CommentList";
 import { useState } from "react";
 import {
   StyleSheet,
@@ -7,11 +7,6 @@ import {
   TouchableOpacity,
   View
 } from "react-native";
-
-type Comment = {
-  id: string;
-  text: string;
-};
 
 export default function Comments() {
   const [comments, setComments] = useState<Comment[]>([]);

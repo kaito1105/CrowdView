@@ -10,12 +10,12 @@ import {
   View
 } from "react-native";
 
-type Comment = {
+export interface Comment {
   id: string;
   text: string;
 };
 
-type Props = {
+interface Props {
   comments: Comment[];
   allCommentsVisible: boolean;
   setAllCommentsVisible: (visible: boolean) => void;

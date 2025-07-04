@@ -1,7 +1,7 @@
 import { Facility } from "@/constants/Facilities";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-type Props = {
+interface Props {
   facility: Facility;
   onPress: (id: string) => void;
 };

@@ -2,7 +2,7 @@ import { Facility } from '@/constants/Facilities';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Callout, Marker } from 'react-native-maps';
 
-type Props = {
+interface Props {
   facility: Facility;
   onPress: (id: string) => void;
 };

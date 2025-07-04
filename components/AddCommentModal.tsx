@@ -7,7 +7,7 @@ import {
   View,
 } from "react-native";
 
-type AddCommentModalProps = {
+interface AddCommentModalProps {
   newCommentVisible: boolean;
   setNewCommentVisible: (visible: boolean) => void;
   newComment: string;

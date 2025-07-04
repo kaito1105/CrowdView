@@ -4,7 +4,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 export default function Index() {
   const router = useRouter();
   const handleStart = (): void => {
-    router.push("/tabs");
+    router.push("/tabs/map");
   };
 
   return (
