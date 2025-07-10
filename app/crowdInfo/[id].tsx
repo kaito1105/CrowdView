@@ -1,5 +1,4 @@
 import useFacility from "@/hooks/useFacility";
-import UseLocation from "@/hooks/useLocation";
 import { StyleSheet, Text, View } from "react-native";
 import Comments from "./sections/Comments";
 
@@ -13,10 +12,6 @@ export default function CrowdInfoScreen() {
           <Text style={styles.crowdInfo}>Crowd level: </Text>
           <Text style={styles.vote}>Vote:</Text>
           <Comments />
-          <UseLocation 
-            centerCoords={facility.center} 
-            edgeCoords={facility.edge}
-          />
         </View>
       ) : (
         <Text>Facility not found.</Text>

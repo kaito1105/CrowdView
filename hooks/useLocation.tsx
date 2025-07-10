@@ -1,69 +1,65 @@
-import checkLocation, { Coordinates } from "@/utils/geoUtils";
+import { Coordinates } from "@/utils/geoUtils";
 import * as Location from "expo-location";
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Alert, Linking, Platform } from "react-native";
 
-interface Props {
-  centerCoords: Coordinates;
-  edgeCoords: Coordinates;
-};
-
-export default function UseLocation({ centerCoords, edgeCoords }: Props) {
-  const [location, setLocation] = useState<Coordinates | null>(null);
-  const [time, setTime] = useState<string | null>(null);
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
-
-  useEffect(() => {
-    let intervalId;
-
-    async function getCurrentLocation() {
-      const { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        setErrorMsg("Permission to access location was denied");
-        return;
-      }
-
-      const location = await Location.getCurrentPositionAsync({});
-      setLocation(location.coords);
-      setTime(new Date(location.timestamp).toLocaleString());
-    }
-    getCurrentLocation();
-
-    intervalId = setInterval(getCurrentLocation, 60000); // 1 min
-    return () => clearInterval(intervalId);
-  }, []);
-
-  return (
-    <View>
-      <Text style={styles.title}>Your Location:</Text>
-      <Text style={styles.coords}>
-        {errorMsg ? errorMsg :
-          location ? 
-            `Latitude: ${location.latitude}\nLongitude: ${location.longitude}\nTime: ${time}` :
-            "Getting location..."
-        }
-      </Text>
-      {checkLocation(centerCoords, edgeCoords, location) ? (
-        <Text style={styles.info}>
-          You are currently inside this facility.
-        </Text>
-      ) : (
-        <Text style={styles.info}>
-          You aren't currently inside this facility.
-        </Text>
-      )}
-    </View>
-  );
+interface UseLocationResult {
+  location: Coordinates | null;
+  time: string | null;
 }
 
-const styles = StyleSheet.create({
-  title: {
-    fontWeight: "bold",
-  },
-  coords: {
-    paddingLeft: 15,
-  },
-  info: {
-    paddingLeft: 15,
-  }
-})
+export default function useLocation(): UseLocationResult {
+  const [coords, setCoords] = useState<Coordinates | null>(null);
+  const [status, requestPermission] = Location.useForegroundPermissions();
+  const [time, setTime] = useState<string | null>(null);
+
+  useEffect(() => {
+    const checkInterval = setInterval(async () => {
+      const permissionGranted = await requestLocationPermission();
+      if (!permissionGranted) return;
+
+      try {
+        const location = await Location.getCurrentPositionAsync({});
+        setCoords(location.coords);
+        setTime(new Date(location.timestamp).toLocaleString());
+        // console.log(coords, time);
+      } catch (error) {
+        console.log("Location error", error);
+      }
+    }, 6000); // 1 min
+
+    return () => clearInterval(checkInterval);
+  }, []);
+
+  const requestLocationPermission = async (): Promise<boolean> => {
+    try {
+      if (Platform.OS === "web") return false;
+
+      if (status?.status !== "granted") {
+        const permissionResponse = await requestPermission();
+        if (permissionResponse.status !== "granted") {
+          Alert.alert(
+            "Permission not granted",
+            "Please allow access to your location to use this app.",
+            [
+              { text: "Cancel" },
+              {
+                text: "Open Settings",
+                onPress: () =>
+                  Platform.OS === "ios"
+                    ? Linking.openURL("app-settings:")
+                    : Linking.openSettings(),
+              },
+            ]
+          );
+          return false;
+        }
+      }
+      return true;
+    } catch (error) {
+      console.log("Permission check failed:", error);
+      return false;
+    }
+  };
+  return { location: coords, time };
+}

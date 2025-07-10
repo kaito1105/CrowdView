@@ -1,12 +1,14 @@
 import FacilityMarker from "@/components/FacilityMarker";
 import { FACILITIES, Facility } from "@/constants/Facilities";
 import { INITIAL_REGION } from "@/constants/Region";
+import useLocation from "@/hooks/useLocation";
 import { useRouter } from 'expo-router';
 import { useRef } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Region } from 'react-native-maps';
 
 export default function MapScreen() {
+  const { location, time } = useLocation();
   const mapRef = useRef<MapView>(null);
   const router = useRouter();
   
@@ -26,7 +28,7 @@ export default function MapScreen() {
         provider={PROVIDER_GOOGLE}
         initialRegion={INITIAL_REGION}
       >
-        {FACILITIES.map((facility: Facility) => (
+        {location && FACILITIES.map((facility: Facility) => (
           <FacilityMarker 
             key={facility.id} 
             facility={facility} 
