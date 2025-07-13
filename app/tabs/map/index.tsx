@@ -1,22 +1,24 @@
 import FacilityMarker from "@/components/FacilityMarker";
-import { FACILITIES } from "@/constants/Facilities";
+import { FACILITIES, Facility } from "@/constants/Facilities";
 import { INITIAL_REGION } from "@/constants/Region";
+import useLocation from "@/hooks/useLocation";
 import { useRouter } from 'expo-router';
 import { useRef } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE, Region } from 'react-native-maps';
 
 export default function MapScreen() {
-  const mapRef = useRef(null);
+  const { location, time } = useLocation();
+  const mapRef = useRef<MapView>(null);
   const router = useRouter();
   
   const handleRecenter = () => {
     if (mapRef.current) {
-      mapRef.current.animateToRegion(INITIAL_REGION, 500);
+      mapRef.current.animateToRegion(INITIAL_REGION as Region, 500);
     }
   };
 
-  const handleDetailPress = (id) => router.push(`/crowdInfo/${id}`);
+  const handleDetailPress = (id: string) => router.push(`/crowdInfo/${id}`);
 
   return (
     <View style={styles.container}>
@@ -26,7 +28,7 @@ export default function MapScreen() {
         provider={PROVIDER_GOOGLE}
         initialRegion={INITIAL_REGION}
       >
-        {FACILITIES.map(facility => (
+        {location && FACILITIES.map((facility: Facility) => (
           <FacilityMarker 
             key={facility.id} 
             facility={facility} 
@@ -36,7 +38,7 @@ export default function MapScreen() {
       </MapView>
       <TouchableOpacity 
         style={styles.recenterButton} 
-        onPress={() => handleRecenter()}
+        onPress={handleRecenter}
       >
         <Text style={styles.recenterText}>Recenter</Text>
       </TouchableOpacity>

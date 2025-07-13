@@ -1,4 +1,19 @@
-export const FACILITIES = [{
+export type Facility = {
+  id: string;
+  name: string;
+  description: "low" | "mid" | "high";
+  color: string;
+  center: {
+    latitude: number;
+    longitude: number;
+  };
+  edge: {
+    latitude: number;
+    longitude: number;
+  };
+};
+
+export const FACILITIES: Facility[] = [{
     id: "Cafeteria",
     name: "LFC Cafeteria",
     description: "mid",

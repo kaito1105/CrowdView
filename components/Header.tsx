@@ -1,7 +1,12 @@
 import { useRouter } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-export default function Header({hasBack, title=""}) {
+interface HeaderProps {
+  hasBack: boolean;
+  title?: string;
+};
+
+export default function Header({hasBack, title=""}: HeaderProps) {
   const router = useRouter();
 
   return (
@@ -14,7 +19,7 @@ export default function Header({hasBack, title=""}) {
           <Text style={styles.backText}>{"<  Back"}</Text>
         </TouchableOpacity>
       )}
-      <Text style={{ fontSize: 24, fontWeight: "bold" }}>{title}</Text>
+      <Text style={styles.title}>{title}</Text>
     </View>
   )
 };
@@ -24,8 +29,7 @@ const styles = StyleSheet.create({
     height: 120,
     backgroundColor: "#fff",
     justifyContent: "flex-end",
-    paddingBottom: 16,
-    paddingHorizontal: 20,
+    alignItems: "center",
     borderBottomWidth: 1,
     borderColor: "#ccc",
   },
@@ -41,5 +45,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "bold",
+    paddingBottom: 16,
   }
 });

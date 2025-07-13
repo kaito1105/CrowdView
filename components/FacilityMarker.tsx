@@ -1,7 +1,13 @@
+import { Facility } from '@/constants/Facilities';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Callout, Marker } from 'react-native-maps';
 
-export default function FacilityMarker({ facility, onPress}) {
+interface Props {
+  facility: Facility;
+  onPress: (id: string) => void;
+};
+
+export default function FacilityMarker({ facility, onPress}: Props) {
 
   return (
     <Marker
@@ -12,10 +18,7 @@ export default function FacilityMarker({ facility, onPress}) {
       }}
       pinColor={facility.color}
     >
-      <Callout
-        tooltip 
-        onPress={() => onPress(facility.id)}
-      >
+      <Callout tooltip onPress={() => onPress(facility.id)} >
         <View style={styles.box}>
           <Text style={styles.title}>{facility.name}</Text>
           <Text style={styles.description}>
