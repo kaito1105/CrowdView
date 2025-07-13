@@ -1,6 +1,5 @@
 export type Facility = {
   id: string;
-  name: string;
   description: "low" | "mid" | "high";
   color: string;
   center: {
@@ -15,7 +14,6 @@ export type Facility = {
 
 export const FACILITIES: Facility[] = [{
     id: "Cafeteria",
-    name: "LFC Cafeteria",
     description: "mid",
     color: "orange",
     center: {
@@ -28,7 +26,6 @@ export const FACILITIES: Facility[] = [{
     },
   }, {
     id: "Library",
-    name: "LFC Library",
     description: "low",
     color: "green",
     center: {
@@ -40,8 +37,7 @@ export const FACILITIES: Facility[] = [{
       longitude: -87.82723557607686,
     },
   }, {
-    id: "SRC",
-    name: "LFC SRC",
+    id: "Sports & Recreation Center",
     description: "high",
     color: "tomato",
     center: {
@@ -54,7 +50,6 @@ export const FACILITIES: Facility[] = [{
     },
   }, {
     id: "Boomers",
-    name: "LFC Boomers",
     description: "low",
     color: "green",
     center: {

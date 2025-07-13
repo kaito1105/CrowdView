@@ -11,7 +11,7 @@ export default function CrowdInfoLayout() {
         name="[id]"
         options={{
           header: () => 
-            <Header hasBack={true} title={facility?.name ?? "Crowd Info"} />
+            <Header hasBack={true} title={facility?.id ?? "Crowd Info"} />
         }}
       />
     </Stack>

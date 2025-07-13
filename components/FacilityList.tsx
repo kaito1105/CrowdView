@@ -41,7 +41,7 @@ export default function FacilityList({ facility, onPress }: Props) {
       >
         <Text style={styles.buttonText}>Details</Text>
       </TouchableOpacity>
-      <Text style={styles.title}>{facility.name}</Text>
+      <Text style={styles.title}>{facility.id}</Text>
       <Text style={styles.description}>
         Crowd level:{" "}
         <Text 

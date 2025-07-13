@@ -20,7 +20,7 @@ export default function FacilityMarker({ facility, onPress}: Props) {
     >
       <Callout tooltip onPress={() => onPress(facility.id)} >
         <View style={styles.box}>
-          <Text style={styles.title}>{facility.name}</Text>
+          <Text style={styles.title}>{facility.id}</Text>
           <Text style={styles.description}>
             {`Crowd level: ${facility.description}`}
           </Text>
