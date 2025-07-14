@@ -32,6 +32,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderBottomWidth: 1,
     borderColor: "#ccc",
+    
+    // iOS shadow
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+
+    // Android shadow
+    elevation: 3,
   },
   backButton: {
     position: "absolute",
@@ -43,7 +52,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   title: {
-    fontSize: 24,
+    fontSize: 22,
+    letterSpacing: 0.5,
     fontWeight: "bold",
     paddingBottom: 16,
   }
