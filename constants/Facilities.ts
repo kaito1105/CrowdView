@@ -1,7 +1,6 @@
 export type Facility = {
   id: string;
-  description: "low" | "mid" | "high";
-  color: string;
+  description: "low" | "medium" | "high";
   center: {
     latitude: number;
     longitude: number;
@@ -14,8 +13,7 @@ export type Facility = {
 
 export const FACILITIES: Facility[] = [{
     id: "Cafeteria",
-    description: "mid",
-    color: "orange",
+    description: "medium",
     center: {
       latitude: 42.2489473333388, 
       longitude: -87.82813970120232
@@ -27,7 +25,6 @@ export const FACILITIES: Facility[] = [{
   }, {
     id: "Library",
     description: "low",
-    color: "green",
     center: {
       latitude: 42.24953384054592,
       longitude: -87.82755760166695,
@@ -39,7 +36,6 @@ export const FACILITIES: Facility[] = [{
   }, {
     id: "Sports & Recreation Center",
     description: "high",
-    color: "tomato",
     center: {
       latitude: 42.2442420304945,
       longitude: -87.82799785248999,
@@ -51,7 +47,6 @@ export const FACILITIES: Facility[] = [{
   }, {
     id: "Boomers",
     description: "low",
-    color: "green",
     center: {
       latitude: 42.24875432809444,
       longitude: -87.82767711519685,

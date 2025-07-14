@@ -1,13 +1,55 @@
 import { Facility } from '@/constants/Facilities';
+import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Callout, Marker } from 'react-native-maps';
+import MapView, { Callout, Marker } from 'react-native-maps';
 
 interface Props {
   facility: Facility;
   onPress: (id: string) => void;
+  mapRef: React.RefObject<MapView | null>;
 };
 
-export default function FacilityMarker({ facility, onPress}: Props) {
+const getColorByCrowdLevel = (level: string): string => {
+  switch (level) {
+    case "high":
+      return "#ed3030";
+    case "medium":
+      return "#ff6d4d";
+    case "low":
+      return "#07adcd";
+    default:
+      return "#292929";
+  }
+};
+
+const getBackgroundColorByCrowdLevel = (level: string): string => {
+  switch (level) {
+    case "high":
+      return "#ffebeb";
+    case "medium":
+      return "#fff4ca";
+    case "low":
+      return "#e5fcff";
+    default:
+      return "#707070";
+  }
+};
+
+export default function FacilityMarker({ facility, onPress, mapRef }: Props) {
+  const crowdLevel = facility.description.toLocaleLowerCase();
+
+  const handleCenter = () => {
+    mapRef.current?.animateToRegion(
+      {
+        latitude: facility.center.latitude,
+        longitude: facility.center.longitude,
+        latitudeDelta: 0.002, // smaller for closer zoom
+        longitudeDelta: 0.002,
+      },
+      500
+    );
+  };
+  const handlePress = () => onPress(facility.id);
 
   return (
     <Marker
@@ -16,17 +58,31 @@ export default function FacilityMarker({ facility, onPress}: Props) {
         latitude: facility.center.latitude,
         longitude: facility.center.longitude
       }}
-      pinColor={facility.color}
+      pinColor="#ed3030"
+      onPress={handleCenter}
     >
-      <Callout tooltip onPress={() => onPress(facility.id)} >
+      <Callout tooltip onPress={handlePress}>
         <View style={styles.box}>
           <Text style={styles.title}>{facility.id}</Text>
-          <Text style={styles.description}>
-            {`Crowd level: ${facility.description}`}
-          </Text>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Details</Text>
-          </TouchableOpacity>
+          <View style={styles.crowdLevel}>
+            <Text style={styles.description}>Crowd Level: </Text>
+            <View style={[
+              styles.crowdLevelBox,
+              { backgroundColor: getBackgroundColorByCrowdLevel(crowdLevel) }
+            ]}>
+              <Text style={[
+                styles.crowdLevelText,
+                { color: getColorByCrowdLevel(crowdLevel) }
+              ]}>
+                {crowdLevel.toUpperCase()}
+              </Text>
+            </View>
+          </View>
+          <View style={styles.button}>
+            <TouchableOpacity>
+              <Text style={styles.buttonText}>SEE DETAILS  &gt;</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </Callout>
     </Marker>
@@ -36,13 +92,11 @@ export default function FacilityMarker({ facility, onPress}: Props) {
 const styles = StyleSheet.create({
   box: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
     backgroundColor: "#fff",
-    padding: 15,
+    padding: 20,
+    paddingBottom: 15,
     borderRadius: 8,
-    minWidth: 150,
-    // maxWidth: 200,
+    width: 250,
     elevation: 4, // shadow on Android
     shadowColor: "#000", // shadow on iOS
     shadowOffset: { width: 0, height: 2 },
@@ -50,23 +104,38 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
   },
   title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    textAlign: "center",
+    fontSize: 22,
+    color: "#292929",
     marginBottom: 5,
   },
-  description: {
-    fontSize: 14,
+  crowdLevel: {
+    width: "100%",
+    alignItems: "center",
+    flexDirection: "row",
     marginBottom: 10,
   },
+  description: {
+    fontSize: 16,
+    color: "#707070",
+  },
+  crowdLevelBox: {
+    borderRadius: 3,
+    width: 110,
+    marginHorizontal: 5,
+  },
+  crowdLevelText: {
+    fontWeight: "bold",
+    textAlign: "center",
+    paddingVertical: 3,
+    fontSize: 16,
+  },
   button: {
-    backgroundColor: "#007bff",
-    paddingVertical: 6,
-    paddingHorizontal: 20,
-    borderRadius: 4,
+    width: "100%",
+    alignItems: "flex-end",
   },
   buttonText: {
     fontWeight: "bold",
-    color: "#fff",
+    color: "#0a78f2",
+    fontSize: 13,
   }
 })

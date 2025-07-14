@@ -1,10 +1,12 @@
+import CurrLocImage from "@/assets/images/current_location.jpg";
+import RecenterImage from "@/assets/images/recenter.jpg";
 import FacilityMarker from "@/components/FacilityMarker";
 import { FACILITIES, Facility } from "@/constants/Facilities";
 import { INITIAL_REGION } from "@/constants/Region";
 import useLocation from "@/hooks/useLocation";
 import { useRouter } from 'expo-router';
 import { useRef } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Region } from 'react-native-maps';
 
 export default function MapScreen() {
@@ -12,6 +14,20 @@ export default function MapScreen() {
   const mapRef = useRef<MapView>(null);
   const router = useRouter();
   
+  const getRegionFromCoords = (latitude: number, longitude: number): Region => ({
+    latitude: latitude,
+    longitude: longitude,
+    latitudeDelta: 0.003,
+    longitudeDelta: 0.003,
+  });
+
+  const handleCurrentLocation = () => {
+    if (mapRef.current && location) {
+      const region = getRegionFromCoords(location.latitude, location.longitude);
+      mapRef.current.animateToRegion(region, 500);
+    }
+  };
+
   const handleRecenter = () => {
     if (mapRef.current) {
       mapRef.current.animateToRegion(INITIAL_REGION as Region, 500);
@@ -27,21 +43,25 @@ export default function MapScreen() {
         style={styles.map}
         provider={PROVIDER_GOOGLE}
         initialRegion={INITIAL_REGION}
+        showsUserLocation={true}
       >
-        {location && FACILITIES.map((facility: Facility) => (
+        {FACILITIES.map((facility: Facility) => (
           <FacilityMarker 
             key={facility.id} 
             facility={facility} 
             onPress={handleDetailPress} 
+            mapRef={mapRef as React.RefObject<MapView>}
           />
         ))}
       </MapView>
-      <TouchableOpacity 
-        style={styles.recenterButton} 
-        onPress={handleRecenter}
-      >
-        <Text style={styles.recenterText}>Recenter</Text>
-      </TouchableOpacity>
+      <View style={styles.imageButton}>
+        <TouchableOpacity onPress={handleCurrentLocation} >
+          <Image source={CurrLocImage} style={styles.image} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.recenterButton} onPress={handleRecenter} >
+          <Image source={RecenterImage} style={styles.image} />
+        </TouchableOpacity>
+        </View>
     </View>
   );
 }
@@ -54,16 +74,18 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-  recenterButton: {
+  imageButton: {
+    flexDirection: "column",
     position: "absolute",
-    top: 30,
+    bottom: 20,
     right: 20,
-    backgroundColor: "#007bff",
-    padding: 10,
-    borderRadius: 5,
   },
-  recenterText: {
-    fontWeight: "bold",
-    color: "#fff",
+  image: {
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+  },
+  recenterButton: {
+    marginTop: 10,
   },
 });

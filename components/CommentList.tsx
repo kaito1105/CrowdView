@@ -61,6 +61,7 @@ export default function CommentList({
         animationType="slide"
         transparent
         onRequestClose={() => setAllCommentsVisible(false)}
+        // presentationStyle="formSheet"
       >
         <View style={styles.modalContainer}>
           <Text style={styles.modalTitle}>All Comments</Text>
