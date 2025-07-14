@@ -81,9 +81,9 @@ const styles = StyleSheet.create({
     right: 20,
   },
   image: {
-    width: 70,
-    height: 70,
-    borderRadius: 35,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
   },
   recenterButton: {
     marginTop: 10,

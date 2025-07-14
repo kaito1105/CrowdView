@@ -1,4 +1,5 @@
 import { Facility } from '@/constants/Facilities';
+import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import MapView, { Callout, Marker } from 'react-native-maps';
@@ -78,9 +79,10 @@ export default function FacilityMarker({ facility, onPress, mapRef }: Props) {
               </Text>
             </View>
           </View>
-          <View style={styles.button}>
-            <TouchableOpacity>
-              <Text style={styles.buttonText}>SEE DETAILS  &gt;</Text>
+          <View style={styles.buttonWrapper}>
+            <TouchableOpacity style={styles.button}>
+              <Text style={styles.buttonText}>SEE DETAILS</Text>
+              <Ionicons name="chevron-forward" size={20} color="#0a78f2" style={styles.icon} />
             </TouchableOpacity>
           </View>
         </View>
@@ -129,13 +131,20 @@ const styles = StyleSheet.create({
     paddingVertical: 3,
     fontSize: 16,
   },
+  buttonWrapper: {
+    alignSelf: "flex-end",
+    marginRight: -10,
+  },
   button: {
-    width: "100%",
-    alignItems: "flex-end",
+    alignItems: "center",
+    flexDirection: "row",
   },
   buttonText: {
     fontWeight: "bold",
     color: "#0a78f2",
     fontSize: 13,
+  },
+  icon: {
+    paddingLeft: 5,
   }
 })
