@@ -1,3 +1,4 @@
+import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
@@ -16,7 +17,11 @@ export default function Header({ hasBack, title = "" }: HeaderProps) {
           style={styles.backButton}
           onPress={() => router.back()}
         >
-          <Text style={styles.backText}>{"<  Back"}</Text>
+          <Ionicons
+            name="chevron-back"
+            size={24}
+            color="#a4a4a4a4"
+          />
         </TouchableOpacity>
       )}
       <Text style={styles.title}>{title}</Text>
@@ -44,12 +49,8 @@ const styles = StyleSheet.create({
   },
   backButton: {
     position: "absolute",
-    top: 75,
+    paddingBottom: 16,
     left: 20,
-    zIndex: 999,
-  },
-  backText: {
-    fontSize: 20,
   },
   title: {
     fontSize: 22,
