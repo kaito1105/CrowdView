@@ -10,7 +10,7 @@ export default function CrowdInfoLayout() {
       <Stack.Screen
         name="[id]"
         options={{
-          header: () => 
+          header: () =>
             <Header hasBack={true} title={facility?.id ?? "Crowd Info"} />
         }}
       />

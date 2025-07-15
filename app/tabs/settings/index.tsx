@@ -2,12 +2,25 @@ import CameraImage from "@/assets/images/camera.jpg";
 import ProfileImage from "@/assets/images/profile_temp.jpg";
 import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
-import { Alert, Image, Linking, Platform, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Alert,
+  Image,
+  Linking,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from "react-native";
 
 export default function SettingsScreen() {
   const [image, setImage] = useState<string | null>(null);
-  const [mediaLibraryPermission, requestMediaLibraryPermission] = ImagePicker.useMediaLibraryPermissions();
-  const [cameraPermission, requestCameraPermission] = ImagePicker.useCameraPermissions();
+  const [
+    mediaLibraryPermission, requestMediaLibraryPermission
+  ] = ImagePicker.useMediaLibraryPermissions();
+  const [
+    cameraPermission, requestCameraPermission
+  ] = ImagePicker.useCameraPermissions();
 
   // const requestPermissions = async () => {
   //   const libraryGranted = mediaLibraryPermission?.granted
@@ -26,15 +39,15 @@ export default function SettingsScreen() {
           const permissionResponse = await requestMediaLibraryPermission();
           if (permissionResponse.status !== "granted") {
             Alert.alert(
-              "Permission not granted", 
+              "Permission not granted",
               "Please allow access to your photo library to select an image.",
               [
-                { text: "Cancel" }, 
+                { text: "Cancel" },
                 {
                   text: "Open Settings",
                   onPress: () =>
-                    Platform.OS === "ios" 
-                      ? Linking.openURL("app-settings:") 
+                    Platform.OS === "ios"
+                      ? Linking.openURL("app-settings:")
                       : Linking.openSettings(),
                 },
               ]

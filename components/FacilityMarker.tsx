@@ -1,5 +1,8 @@
 import { Facility } from '@/constants/Facilities';
-import { getBackgroundColorByCrowdLevel, getColorByCrowdLevel } from "@/utils/colorUtils";
+import {
+  getBackgroundColorByCrowdLevel,
+  getColorByCrowdLevel
+} from "@/utils/colorUtils";
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
@@ -57,7 +60,12 @@ export default function FacilityMarker({ facility, onPress, mapRef }: Props) {
           <View style={styles.buttonWrapper}>
             <TouchableOpacity style={styles.button}>
               <Text style={styles.buttonText}>SEE DETAILS</Text>
-              <Ionicons name="chevron-forward" size={20} color="#0a78f2" style={styles.icon} />
+              <Ionicons
+                name="chevron-forward"
+                size={20}
+                color="#0a78f2"
+                style={styles.icon}
+              />
             </TouchableOpacity>
           </View>
         </View>

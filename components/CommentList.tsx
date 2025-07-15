@@ -21,10 +21,10 @@ interface Props {
   setAllCommentsVisible: (visible: boolean) => void;
 };
 
-export default function CommentList({ 
-  comments, 
-  allCommentsVisible, 
-  setAllCommentsVisible 
+export default function CommentList({
+  comments,
+  allCommentsVisible,
+  setAllCommentsVisible
 }: Props) {
   const smallScreenRenderItem: ListRenderItem<Comment> = ({ item }) => (
     <TouchableOpacity onPress={() => setAllCommentsVisible(true)}>
@@ -61,7 +61,7 @@ export default function CommentList({
         animationType="slide"
         transparent
         onRequestClose={() => setAllCommentsVisible(false)}
-        // presentationStyle="formSheet"
+      // presentationStyle="formSheet"
       >
         <View style={styles.modalContainer}>
           <Text style={styles.modalTitle}>All Comments</Text>

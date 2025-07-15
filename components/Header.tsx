@@ -6,14 +6,14 @@ interface HeaderProps {
   title?: string;
 };
 
-export default function Header({hasBack, title=""}: HeaderProps) {
+export default function Header({ hasBack, title = "" }: HeaderProps) {
   const router = useRouter();
 
   return (
     <View style={styles.header}>
       {hasBack && (
-        <TouchableOpacity 
-          style={styles.backButton} 
+        <TouchableOpacity
+          style={styles.backButton}
           onPress={() => router.back()}
         >
           <Text style={styles.backText}>{"<  Back"}</Text>
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderBottomWidth: 1,
     borderColor: "#ccc",
-    
+
     // iOS shadow
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },

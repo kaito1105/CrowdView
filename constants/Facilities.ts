@@ -12,47 +12,47 @@ export type Facility = {
 };
 
 export const FACILITIES: Facility[] = [{
-    id: "Cafeteria",
-    description: "medium",
-    center: {
-      latitude: 42.2489473333388, 
-      longitude: -87.82813970120232
-    },
-    edge: {
-      latitude: 42.24900114126084, 
-      longitude: -87.82841890578662
-    },
-  }, {
-    id: "Library",
-    description: "low",
-    center: {
-      latitude: 42.24953384054592,
-      longitude: -87.82755760166695,
-    },
-    edge: {
-      latitude: 42.24947963314398, 
-      longitude: -87.82723557607686,
-    },
-  }, {
-    id: "Sports & Recreation Center",
-    description: "high",
-    center: {
-      latitude: 42.2442420304945,
-      longitude: -87.82799785248999,
-    },
-    edge: {
-      latitude: 42.24474680996077, 
-      longitude: -87.82836481020739
-    },
-  }, {
-    id: "Boomers",
-    description: "low",
-    center: {
-      latitude: 42.24875432809444,
-      longitude: -87.82767711519685,
-    },
-    edge: {
-      latitude: 42.24863894383993, 
-      longitude: -87.827704850064,
-    },
-  }];
+  id: "Cafeteria",
+  description: "medium",
+  center: {
+    latitude: 42.2489473333388,
+    longitude: -87.82813970120232
+  },
+  edge: {
+    latitude: 42.24900114126084,
+    longitude: -87.82841890578662
+  },
+}, {
+  id: "Library",
+  description: "low",
+  center: {
+    latitude: 42.24953384054592,
+    longitude: -87.82755760166695,
+  },
+  edge: {
+    latitude: 42.24947963314398,
+    longitude: -87.82723557607686,
+  },
+}, {
+  id: "Sports & Recreation Center",
+  description: "high",
+  center: {
+    latitude: 42.2442420304945,
+    longitude: -87.82799785248999,
+  },
+  edge: {
+    latitude: 42.24474680996077,
+    longitude: -87.82836481020739
+  },
+}, {
+  id: "Boomers",
+  description: "low",
+  center: {
+    latitude: 42.24875432809444,
+    longitude: -87.82767711519685,
+  },
+  edge: {
+    latitude: 42.24863894383993,
+    longitude: -87.827704850064,
+  },
+}];

@@ -30,7 +30,7 @@ const MAPPING = {
  */
 export function IconSymbol({
   name,
-  size=24,
+  size = 24,
   color,
   style,
 }: {

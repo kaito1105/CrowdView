@@ -19,7 +19,7 @@ export default function Comments() {
 
     setComments((prev) => [
       ...prev,
-      {id: Date.now.toString(), text: newComment},
+      { id: Date.now.toString(), text: newComment },
     ]);
 
     setNewComment("");
@@ -32,25 +32,25 @@ export default function Comments() {
       {comments.length === 0 ? (
         <Text style={styles.noComments}>No comments</Text>
       ) : (
-        <CommentList 
+        <CommentList
           comments={comments}
           allCommentsVisible={allCommentsVisible}
           setAllCommentsVisible={setAllCommentsVisible}
         />
       )}
 
-      <TouchableOpacity 
-        style={styles.button} 
+      <TouchableOpacity
+        style={styles.button}
         onPress={() => setNewCommentVisible(true)}
       >
         <Text style={styles.buttonText}>+</Text>
       </TouchableOpacity>
 
-      <AddCommentModal 
-        newCommentVisible={newCommentVisible} 
-        setNewCommentVisible={setNewCommentVisible} 
-        newComment={newComment} 
-        setNewComment={setNewComment} 
+      <AddCommentModal
+        newCommentVisible={newCommentVisible}
+        setNewCommentVisible={setNewCommentVisible}
+        newComment={newComment}
+        setNewComment={setNewComment}
         addComment={addComment}
       />
     </View>

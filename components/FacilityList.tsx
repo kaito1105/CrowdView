@@ -1,5 +1,8 @@
 import { Facility } from "@/constants/Facilities";
-import { getBackgroundColorByCrowdLevel, getColorByCrowdLevel } from "@/utils/colorUtils";
+import {
+  getBackgroundColorByCrowdLevel,
+  getColorByCrowdLevel
+} from "@/utils/colorUtils";
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
@@ -14,7 +17,12 @@ export default function FacilityList({ facility, onPress }: Props) {
   return (
     <View style={styles.box}>
       <TouchableOpacity onPress={() => onPress(facility.id)}>
-        <Ionicons name="chevron-forward" size={24} color="#a4a4a4a4" style={styles.icon} />
+        <Ionicons
+          name="chevron-forward"
+          size={24}
+          color="#a4a4a4a4"
+          style={styles.icon}
+        />
         <Text style={styles.title}>{facility.id}</Text>
         <View style={styles.crowdLevel}>
           <Text style={styles.description}>Crowd Level: </Text>

@@ -13,17 +13,19 @@ export default function MapScreen() {
   const { location, time } = useLocation();
   const mapRef = useRef<MapView>(null);
   const router = useRouter();
-  
-  const getRegionFromCoords = (latitude: number, longitude: number): Region => ({
-    latitude: latitude,
-    longitude: longitude,
+
+  const getRegionFromCoords = (lat: number, lon: number): Region => ({
+    latitude: lat,
+    longitude: lon,
     latitudeDelta: 0.003,
     longitudeDelta: 0.003,
   });
 
   const handleCurrentLocation = () => {
     if (mapRef.current && location) {
-      const region = getRegionFromCoords(location.latitude, location.longitude);
+      const region = getRegionFromCoords(
+        location.latitude, location.longitude
+      );
       mapRef.current.animateToRegion(region, 500);
     }
   };
@@ -46,10 +48,10 @@ export default function MapScreen() {
         showsUserLocation={true}
       >
         {FACILITIES.map((facility: Facility) => (
-          <FacilityMarker 
-            key={facility.id} 
-            facility={facility} 
-            onPress={handleDetailPress} 
+          <FacilityMarker
+            key={facility.id}
+            facility={facility}
+            onPress={handleDetailPress}
             mapRef={mapRef as React.RefObject<MapView>}
           />
         ))}
@@ -58,10 +60,14 @@ export default function MapScreen() {
         <TouchableOpacity onPress={handleCurrentLocation} >
           <Image source={CurrLocImage} style={styles.image} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.recenterButton} onPress={handleRecenter} >
+        
+        <TouchableOpacity
+          style={styles.recenterButton}
+          onPress={handleRecenter}
+        >
           <Image source={RecenterImage} style={styles.image} />
         </TouchableOpacity>
-        </View>
+      </View>
     </View>
   );
 }
