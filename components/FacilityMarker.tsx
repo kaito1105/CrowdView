@@ -92,6 +92,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     color: "#292929",
     marginBottom: 5,
+    letterSpacing: 0.8,
   },
   crowdLevel: {
     width: "100%",
@@ -102,6 +103,7 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 16,
     color: "#707070",
+    letterSpacing: 0.6,
   },
   crowdLevelBox: {
     borderRadius: 3,
@@ -113,6 +115,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingVertical: 3,
     fontSize: 16,
+    letterSpacing: 0.6,
   },
   buttonWrapper: {
     alignSelf: "flex-end",
@@ -126,6 +129,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#0a78f2",
     fontSize: 13,
+    letterSpacing: 0.6,
   },
   icon: {
     paddingLeft: 5,

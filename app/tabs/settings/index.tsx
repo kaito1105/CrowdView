@@ -174,6 +174,7 @@ const styles = StyleSheet.create({
     color: "#292929",
     fontWeight: "bold",
     textAlign: "center",
+    letterSpacing: 0.5,
   },
   section: {
     paddingVertical: 25,
@@ -190,6 +191,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     color: "#292929",
+    letterSpacing: 0.5,
   },
   userEmail: {
     fontSize: 16,
@@ -220,6 +222,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "#707070",
     paddingHorizontal: 10,
+    letterSpacing: 0.4,
   },
   termsOfUse: {
     flexDirection: "row",
