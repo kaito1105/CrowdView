@@ -1,36 +1,11 @@
 import { Facility } from "@/constants/Facilities";
+import { getBackgroundColorByCrowdLevel, getColorByCrowdLevel } from "@/utils/colorUtils";
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 interface Props {
   facility: Facility;
   onPress: (id: string) => void;
-};
-
-const getColorByCrowdLevel = (level: string): string => {
-  switch (level) {
-    case "high":
-      return "#ed3030";
-    case "medium":
-      return "#ff6d4d";
-    case "low":
-      return "#07adcd";
-    default:
-      return "#292929";
-  }
-};
-
-const getBackgroundColorByCrowdLevel = (level: string): string => {
-  switch (level) {
-    case "high":
-      return "#ffebeb";
-    case "medium":
-      return "#fff4ca";
-    case "low":
-      return "#e5fcff";
-    default:
-      return "#707070";
-  }
 };
 
 export default function FacilityList({ facility, onPress }: Props) {

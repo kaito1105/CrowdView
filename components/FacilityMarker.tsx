@@ -1,4 +1,5 @@
 import { Facility } from '@/constants/Facilities';
+import { getBackgroundColorByCrowdLevel, getColorByCrowdLevel } from "@/utils/colorUtils";
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
@@ -10,32 +11,6 @@ interface Props {
   mapRef: React.RefObject<MapView | null>;
 };
 
-const getColorByCrowdLevel = (level: string): string => {
-  switch (level) {
-    case "high":
-      return "#ed3030";
-    case "medium":
-      return "#ff6d4d";
-    case "low":
-      return "#07adcd";
-    default:
-      return "#292929";
-  }
-};
-
-const getBackgroundColorByCrowdLevel = (level: string): string => {
-  switch (level) {
-    case "high":
-      return "#ffebeb";
-    case "medium":
-      return "#fff4ca";
-    case "low":
-      return "#e5fcff";
-    default:
-      return "#707070";
-  }
-};
-
 export default function FacilityMarker({ facility, onPress, mapRef }: Props) {
   const crowdLevel = facility.description.toLocaleLowerCase();
 
@@ -44,7 +19,7 @@ export default function FacilityMarker({ facility, onPress, mapRef }: Props) {
       {
         latitude: facility.center.latitude,
         longitude: facility.center.longitude,
-        latitudeDelta: 0.002, // smaller for closer zoom
+        latitudeDelta: 0.002,
         longitudeDelta: 0.002,
       },
       500
