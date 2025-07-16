@@ -56,11 +56,12 @@ export default function MapScreen() {
           />
         ))}
       </MapView>
-      <View style={styles.imageButton}>
+      
+      <View style={styles.imageButtons}>
         <TouchableOpacity onPress={handleCurrentLocation} >
           <Image source={CurrLocImage} style={styles.image} />
         </TouchableOpacity>
-        
+
         <TouchableOpacity
           style={styles.recenterButton}
           onPress={handleRecenter}
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-  imageButton: {
+  imageButtons: {
     flexDirection: "column",
     position: "absolute",
     bottom: 20,

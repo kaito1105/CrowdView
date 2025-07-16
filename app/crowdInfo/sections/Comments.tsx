@@ -75,6 +75,7 @@ export default function Comments() {
           addComment={addComment}
         />
       </View>
+      
       <View style={styles.postComment}>
         <Image source={ProfileImage} style={styles.profileImage} />
         <TextInput

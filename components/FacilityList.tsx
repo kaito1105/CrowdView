@@ -25,7 +25,7 @@ export default function FacilityList({ facility, onPress }: Props) {
         />
         <Text style={styles.title}>{facility.id}</Text>
         <View style={styles.crowdLevel}>
-          <Text style={styles.description}>Crowd Level: </Text>
+          <Text style={styles.subtitle}>Crowd Level: </Text>
           <View style={[
             styles.crowdLevelBox,
             { backgroundColor: getBackgroundColorByCrowdLevel(crowdLevel) }
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
   },
-  description: {
+  subtitle: {
     fontSize: 16,
     color: "#707070",
     letterSpacing: 0.6,

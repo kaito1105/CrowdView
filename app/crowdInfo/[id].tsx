@@ -19,16 +19,25 @@ export default function CrowdInfoScreen() {
         <Image source={TempImage} style={styles.image} />
         <View style={styles.context}>
           <Text style={styles.title}>{facility.id}</Text>
+
           <View style={styles.section}>
             <View>
               <Text style={styles.subtitle}>Crowd Level</Text>
               <View style={[
                 styles.crowdLevelBox,
-                { backgroundColor: getBackgroundColorByCrowdLevel(facility.description.toLocaleLowerCase()) }
+                {
+                  backgroundColor: getBackgroundColorByCrowdLevel(
+                    facility.description.toLocaleLowerCase()
+                  )
+                }
               ]}>
                 <Text style={[
                   styles.crowdLevelText,
-                  { color: getColorByCrowdLevel(facility.description.toLocaleLowerCase()) }
+                  {
+                    color: getColorByCrowdLevel(
+                      facility.description.toLocaleLowerCase()
+                    )
+                  }
                 ]}>
                   {facility.description.toUpperCase()}
                 </Text>
@@ -41,6 +50,7 @@ export default function CrowdInfoScreen() {
                 <Text style={styles.time}>4:30am - 8pm</Text> */}
             </View>
           </View>
+
           <Text style={styles.subtitle}>Crowd Level Vote</Text>
           <Text style={styles.question}>HOW CROWDED IS IT NOW?</Text>
           <VoteButtons />

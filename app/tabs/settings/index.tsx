@@ -91,6 +91,7 @@ export default function SettingsScreen() {
 
       <View style={styles.profile}>
         <Text style={styles.name}>Kaito Miyamoto</Text>
+        
         <View style={styles.section}>
           <View style={styles.email}>
             <Text style={styles.title}>Email address</Text>

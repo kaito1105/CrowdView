@@ -18,15 +18,12 @@ export default function FacilityMarker({ facility, onPress, mapRef }: Props) {
   const crowdLevel = facility.description.toLocaleLowerCase();
 
   const handleCenter = () => {
-    mapRef.current?.animateToRegion(
-      {
-        latitude: facility.center.latitude,
-        longitude: facility.center.longitude,
-        latitudeDelta: 0.002,
-        longitudeDelta: 0.002,
-      },
-      500
-    );
+    mapRef.current?.animateToRegion({
+      latitude: facility.center.latitude,
+      longitude: facility.center.longitude,
+      latitudeDelta: 0.002,
+      longitudeDelta: 0.002,
+    }, 500);
   };
   const handlePress = () => onPress(facility.id);
 
@@ -43,8 +40,9 @@ export default function FacilityMarker({ facility, onPress, mapRef }: Props) {
       <Callout tooltip onPress={handlePress}>
         <View style={styles.box}>
           <Text style={styles.title}>{facility.id}</Text>
+
           <View style={styles.crowdLevel}>
-            <Text style={styles.description}>Crowd Level: </Text>
+            <Text style={styles.subtitle}>Crowd Level: </Text>
             <View style={[
               styles.crowdLevelBox,
               { backgroundColor: getBackgroundColorByCrowdLevel(crowdLevel) }
@@ -57,6 +55,7 @@ export default function FacilityMarker({ facility, onPress, mapRef }: Props) {
               </Text>
             </View>
           </View>
+
           <View style={styles.buttonWrapper}>
             <TouchableOpacity style={styles.button}>
               <Text style={styles.buttonText}>SEE DETAILS</Text>
@@ -64,7 +63,6 @@ export default function FacilityMarker({ facility, onPress, mapRef }: Props) {
                 name="chevron-forward"
                 size={20}
                 color="#0a78f2"
-                style={styles.icon}
               />
             </TouchableOpacity>
           </View>
@@ -85,8 +83,8 @@ const styles = StyleSheet.create({
     elevation: 4, // shadow on Android
     shadowColor: "#000", // shadow on iOS
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
   },
   title: {
     fontSize: 22,
@@ -100,14 +98,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginBottom: 10,
   },
-  description: {
+  subtitle: {
     fontSize: 16,
     color: "#707070",
     letterSpacing: 0.6,
   },
   crowdLevelBox: {
     borderRadius: 3,
-    width: 110,
+    width: 105,
     marginHorizontal: 5,
   },
   crowdLevelText: {
@@ -130,8 +128,6 @@ const styles = StyleSheet.create({
     color: "#0a78f2",
     fontSize: 13,
     letterSpacing: 0.6,
+    paddingRight: 5,
   },
-  icon: {
-    paddingLeft: 5,
-  }
 })
