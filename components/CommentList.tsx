@@ -55,6 +55,7 @@ export default function CommentList({
         keyExtractor={(item) => item.id}
         renderItem={smallScreenRenderItem}
         scrollEnabled={false}
+        // keyboardShouldPersistTaps="handled"
       />
 
       <Modal

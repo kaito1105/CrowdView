@@ -1,5 +1,5 @@
 import ProfileImage from "@/assets/images/profile_temp.jpg";
-import AddCommentModal from "@/components/AddCommentModal";
+// import AddCommentModal from "@/components/AddCommentModal";
 import CommentList, { Comment } from "@/components/CommentList";
 import { Ionicons } from '@expo/vector-icons';
 import { useState } from "react";
@@ -9,7 +9,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 
 export default function Comments() {
@@ -67,22 +67,27 @@ export default function Comments() {
           <Text style={styles.buttonText}>+</Text>
         </TouchableOpacity> */}
 
-        <AddCommentModal
-          newCommentVisible={newCommentVisible}
-          setNewCommentVisible={setNewCommentVisible}
-          newComment={newComment}
-          setNewComment={setNewComment}
-          addComment={addComment}
-        />
+        {/* <AddCommentModal
+              newCommentVisible={newCommentVisible}
+              setNewCommentVisible={setNewCommentVisible}
+              newComment={newComment}
+              setNewComment={setNewComment}
+              addComment={addComment}
+            /> */}
       </View>
-      
-      <View style={styles.postComment}>
+
+      <View style={styles.postCommentContainer}>
         <Image source={ProfileImage} style={styles.profileImage} />
         <TextInput
           style={styles.textInput}
           placeholder="What's happening?"
-          placeholderTextColor="#707070" />
-        <Ionicons name="send" size={26} color="#33bff4" style={styles.post}/>
+          placeholderTextColor="#707070"
+          value={newComment}
+          onChangeText={setNewComment}
+        />
+        <TouchableOpacity onPress={addComment}>
+          <Ionicons name="send" size={26} color="#33bff4" style={styles.post} />
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -91,7 +96,6 @@ export default function Comments() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginBottom: 50,
   },
   titleSection: {
     flexDirection: "row",
@@ -137,17 +141,27 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginHorizontal: 10,
   },
+  postCommentContainer: {
+    marginHorizontal: 10,
+    marginBottom: 50,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    borderTopWidth: 1,
+    borderColor: "#ccc",
+    backgroundColor: "#fff",
+  },
   textInput: {
+    flex: 1,
     borderWidth: 1,
-    borderColor: "#707070",
+    borderColor: "#ccc",
     borderRadius: 8,
     paddingHorizontal: 10,
     paddingVertical: 5,
     fontSize: 16,
-    width: "80%",
   },
   post: {
-    padding: 5,
+    padding: 10,
   },
   button: {
     position: "absolute",
