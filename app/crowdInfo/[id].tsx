@@ -12,6 +12,9 @@ export default function CrowdInfoScreen() {
 
   if (!facility) return <Text>Facility not found.</Text>;
 
+  const today = new Date();
+  const dayIndex = today.getDay();
+
   return (
     <View style={styles.background}>
       <ScrollView style={styles.container}>
@@ -44,16 +47,16 @@ export default function CrowdInfoScreen() {
             </View>
             <View>
               <Text style={styles.subtitle}>Today's Hours</Text>
-              <Text style={styles.time}>7:30am - 9:30am</Text>
-              {/* <Text style={styles.time}>10:45am - 2pm</Text>
-                <Text style={styles.time}>4:30am - 8pm</Text> */}
+              {facility.hours[dayIndex].map((item: string, index: number) => (
+                <Text key={index} style={styles.hours}>{item}</Text>
+              ))}
             </View>
           </View>
 
           <Text style={styles.subtitle}>Crowd Level Vote</Text>
           <Text style={styles.question}>HOW CROWDED IS IT NOW?</Text>
           <VoteButtons />
-          
+
           <Comments />
         </View>
       </ScrollView>
@@ -107,7 +110,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     letterSpacing: 0.6,
   },
-  time: {
+  hours: {
     fontSize: 14,
     color: "#292929",
     paddingRight: 20,
