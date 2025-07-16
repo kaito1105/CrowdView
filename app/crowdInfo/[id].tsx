@@ -1,4 +1,3 @@
-import TempImage from "@/assets/images/partial-react-logo.png";
 import VoteButtons from "@/components/VoteButtons";
 import useFacility from "@/hooks/useFacility";
 import {
@@ -16,7 +15,7 @@ export default function CrowdInfoScreen() {
   return (
     <View style={styles.background}>
       <ScrollView style={styles.container}>
-        <Image source={TempImage} style={styles.image} />
+        <Image source={facility.imagePath} style={styles.image} />
         <View style={styles.context}>
           <Text style={styles.title}>{facility.id}</Text>
 
