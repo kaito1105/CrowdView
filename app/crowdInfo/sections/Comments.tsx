@@ -1,15 +1,24 @@
+import ProfileImage from "@/assets/images/profile_temp.jpg";
 import AddCommentModal from "@/components/AddCommentModal";
 import CommentList, { Comment } from "@/components/CommentList";
+import { Ionicons } from '@expo/vector-icons';
 import { useState } from "react";
 import {
+  Image,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 
 export default function Comments() {
-  const [comments, setComments] = useState<Comment[]>([]);
+  const [comments, setComments] = useState<Comment[]>([
+    { id: "1min", text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor." },
+    { id: "2min", text: "labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ." },
+    { id: "13min", text: "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " },
+    { id: "40min", text: "Hello Hello" },
+  ]);
   const [newCommentVisible, setNewCommentVisible] = useState<boolean>(false);
   const [newComment, setNewComment] = useState<string>("");
   const [allCommentsVisible, setAllCommentsVisible] = useState<boolean>(false);
@@ -28,52 +37,116 @@ export default function Comments() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Comments</Text>
-      {comments.length === 0 ? (
-        <Text style={styles.noComments}>No comments</Text>
-      ) : (
-        <CommentList
-          comments={comments}
-          allCommentsVisible={allCommentsVisible}
-          setAllCommentsVisible={setAllCommentsVisible}
+      <View style={styles.titleSection}>
+        <Text style={styles.title}>Recent Comments</Text>
+        <TouchableOpacity style={styles.seeMoreButton}>
+          <Text style={styles.seeMoreText}>SEE MORE</Text>
+          <Ionicons
+            name="chevron-forward"
+            size={20}
+            color="#0a78f2"
+          />
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.commentSection}>
+        {comments.length === 0 ? (
+          <Text style={styles.noComments}>No comments</Text>
+        ) : (
+          <CommentList
+            comments={comments}
+            allCommentsVisible={allCommentsVisible}
+            setAllCommentsVisible={setAllCommentsVisible}
+          />
+        )}
+
+        {/* <TouchableOpacity
+          style={styles.button}
+          onPress={() => setNewCommentVisible(true)}
+        >
+          <Text style={styles.buttonText}>+</Text>
+        </TouchableOpacity> */}
+
+        <AddCommentModal
+          newCommentVisible={newCommentVisible}
+          setNewCommentVisible={setNewCommentVisible}
+          newComment={newComment}
+          setNewComment={setNewComment}
+          addComment={addComment}
         />
-      )}
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => setNewCommentVisible(true)}
-      >
-        <Text style={styles.buttonText}>+</Text>
-      </TouchableOpacity>
-
-      <AddCommentModal
-        newCommentVisible={newCommentVisible}
-        setNewCommentVisible={setNewCommentVisible}
-        newComment={newComment}
-        setNewComment={setNewComment}
-        addComment={addComment}
-      />
+      </View>
+      <View style={styles.postComment}>
+        <Image source={ProfileImage} style={styles.profileImage} />
+        <TextInput
+          style={styles.textInput}
+          placeholder="What's happening?"
+          placeholderTextColor="#707070" />
+        <Ionicons name="send" size={26} color="#33bff4" style={styles.post}/>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#ddd",
-    padding: 10,
-    marginBottom: 10,
-    height: 200,
+    flex: 1,
+    marginBottom: 50,
+  },
+  titleSection: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 5,
   },
   title: {
+    fontSize: 14,
+    color: "#707070",
+    letterSpacing: 0.3,
+    marginBottom: 5,
+  },
+  seeMoreButton: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  seeMoreText: {
     fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: 10,
+    color: "#0a78f2",
+    fontSize: 13,
+    letterSpacing: 0.3,
+  },
+  commentSection: {
+    marginHorizontal: 10,
   },
   noComments: {
-    color: "#666",
+    color: "#707070",
     textAlign: "center",
     fontSize: 22,
     paddingTop: 50,
+  },
+  postComment: {
+    marginHorizontal: 10,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  profileImage: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    marginHorizontal: 10,
+  },
+  textInput: {
+    borderWidth: 1,
+    borderColor: "#707070",
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    fontSize: 16,
+    width: "80%",
+  },
+  post: {
+    padding: 5,
   },
   button: {
     position: "absolute",
