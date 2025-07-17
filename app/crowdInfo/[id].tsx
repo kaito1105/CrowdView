@@ -36,11 +36,11 @@ export default function CrowdInfoScreen() {
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={{ flex: 1 }}
-    // keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 20}
+      // keyboardVerticalOffset={Platform.OS === "ios" ? 20 : 100}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.background}>
-          <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          <ScrollView contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps="handled">
             <Image source={facility.imagePath} style={styles.image} />
             <View style={styles.context}>
               <Text style={styles.title}>{facility.id}</Text>
@@ -74,7 +74,7 @@ export default function CrowdInfoScreen() {
                     <TouchableOpacity onPress={handlePress}>
                       <FontAwesome
                         name="exclamation-circle"
-                        size={18} color="#707070"
+                        size={18} color="#aaa"
                         style={styles.icon}
                       />
                     </TouchableOpacity>
@@ -92,7 +92,7 @@ export default function CrowdInfoScreen() {
                   <FontAwesome
                     name="exclamation-circle"
                     size={18}
-                    color="#707070" style={styles.icon}
+                    color="#aaa" style={styles.icon}
                   />
                 </TouchableOpacity>
               </View>
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   title: {
-    fontSize: 22,
+    fontSize: 24,
     color: "#292929",
     letterSpacing: 0.5,
     marginBottom: 20,

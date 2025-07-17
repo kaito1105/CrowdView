@@ -147,8 +147,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    borderTopWidth: 1,
-    borderColor: "#ccc",
     backgroundColor: "#fff",
   },
   textInput: {
