@@ -15,7 +15,7 @@ interface Props {
 };
 
 export default function FacilityMarker({ facility, onPress, mapRef }: Props) {
-  const crowdLevel = facility.description.toLocaleLowerCase();
+  const crowdLevel = facility.level.toLocaleLowerCase();
 
   const handleCenter = () => {
     mapRef.current?.animateToRegion({
@@ -25,7 +25,7 @@ export default function FacilityMarker({ facility, onPress, mapRef }: Props) {
       longitudeDelta: 0.002,
     }, 500);
   };
-  const handlePress = () => onPress(facility.id);
+  const handleDetailPress = () => onPress(facility.id);
 
   return (
     <Marker
@@ -37,18 +37,18 @@ export default function FacilityMarker({ facility, onPress, mapRef }: Props) {
       pinColor="#ed3030"
       onPress={handleCenter}
     >
-      <Callout tooltip onPress={handlePress}>
-        <View style={styles.box}>
+      <Callout tooltip onPress={handleDetailPress}>
+        <View style={styles.container}>
           <Text style={styles.title}>{facility.id}</Text>
 
           <View style={styles.crowdLevel}>
             <Text style={styles.subtitle}>Crowd Level: </Text>
             <View style={[
-              styles.crowdLevelBox,
+              styles.statusBox,
               { backgroundColor: getBackgroundColorByCrowdLevel(crowdLevel) }
             ]}>
               <Text style={[
-                styles.crowdLevelText,
+                styles.statusText,
                 { color: getColorByCrowdLevel(crowdLevel) }
               ]}>
                 {crowdLevel.toUpperCase()}
@@ -73,7 +73,7 @@ export default function FacilityMarker({ facility, onPress, mapRef }: Props) {
 }
 
 const styles = StyleSheet.create({
-  box: {
+  container: {
     flex: 1,
     backgroundColor: "#fff",
     padding: 20,
@@ -103,12 +103,12 @@ const styles = StyleSheet.create({
     color: "#707070",
     letterSpacing: 0.6,
   },
-  crowdLevelBox: {
+  statusBox: {
     borderRadius: 3,
     width: 105,
     marginHorizontal: 5,
   },
-  crowdLevelText: {
+  statusText: {
     fontWeight: "bold",
     textAlign: "center",
     paddingVertical: 3,

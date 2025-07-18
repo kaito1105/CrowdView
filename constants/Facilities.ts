@@ -2,7 +2,7 @@ import { ImageSourcePropType } from 'react-native';
 
 export type Facility = {
   id: string;
-  description: "low" | "medium" | "high";
+  level: "low" | "medium" | "high";
   imagePath: ImageSourcePropType | undefined;
   hours: string[][]; // 0-6, Sunday through Saturday
   center: {
@@ -17,7 +17,7 @@ export type Facility = {
 
 export const FACILITIES: Facility[] = [{
   id: "Cafeteria",
-  description: "medium",
+  level: "medium",
   imagePath: require("@/assets/images/cafe.jpg"),
   hours: [
     ["9:00am - 2:00pm", "4:30 - 8:00pm"],
@@ -38,7 +38,7 @@ export const FACILITIES: Facility[] = [{
   },
 }, {
   id: "Library",
-  description: "low",
+  level: "low",
   imagePath: require("@/assets/images/library.jpg"),
   hours: [
     ["8:00am - 11:00pm"],
@@ -59,7 +59,7 @@ export const FACILITIES: Facility[] = [{
   },
 }, {
   id: "Sports & Recreation Center",
-  description: "high",
+  level: "high",
   imagePath: require("@/assets/images/src.jpg"),
   hours: [
     ["8:00am - 11:00pm"],
@@ -80,7 +80,7 @@ export const FACILITIES: Facility[] = [{
   },
 }, {
   id: "Boomers",
-  description: "low",
+  level: "low",
   imagePath: require("@/assets/images/boomers.jpg"),
   hours: [
     ["10:00am - 11:59pm"],

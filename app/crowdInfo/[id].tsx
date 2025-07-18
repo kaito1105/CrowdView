@@ -28,8 +28,12 @@ export default function CrowdInfoScreen() {
   const today = new Date();
   const dayIndex = today.getDay();
 
-  const handlePress = () => {
+  const handlePressHours = () => {
     Alert.alert("Business hours may differ from the usual schedule.");
+  };
+
+  const handlePressVote = () => {
+    Alert.alert("Voting can be updated every 10 minutes.");
   };
 
   return (
@@ -52,7 +56,7 @@ export default function CrowdInfoScreen() {
                     styles.crowdLevelBox,
                     {
                       backgroundColor: getBackgroundColorByCrowdLevel(
-                        facility.description.toLocaleLowerCase()
+                        facility.level.toLocaleLowerCase()
                       )
                     }
                   ]}>
@@ -60,18 +64,18 @@ export default function CrowdInfoScreen() {
                       styles.crowdLevelText,
                       {
                         color: getColorByCrowdLevel(
-                          facility.description.toLocaleLowerCase()
+                          facility.level.toLocaleLowerCase()
                         )
                       }
                     ]}>
-                      {facility.description.toUpperCase()}
+                      {facility.level.toUpperCase()}
                     </Text>
                   </View>
                 </View>
                 <View>
                   <View style={styles.header}>
                     <Text style={styles.subtitle}>Today's Hours</Text>
-                    <TouchableOpacity onPress={handlePress}>
+                    <TouchableOpacity onPress={handlePressHours}>
                       <FontAwesome
                         name="exclamation-circle"
                         size={18} color="#aaa"
@@ -88,7 +92,7 @@ export default function CrowdInfoScreen() {
 
               <View style={styles.header}>
                 <Text style={styles.subtitle}>Crowd Level Vote</Text>
-                <TouchableOpacity onPress={handlePress}>
+                <TouchableOpacity onPress={handlePressVote}>
                   <FontAwesome
                     name="exclamation-circle"
                     size={18}

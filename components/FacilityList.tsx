@@ -12,11 +12,12 @@ interface Props {
 };
 
 export default function FacilityList({ facility, onPress }: Props) {
-  const crowdLevel = facility.description.toLocaleLowerCase();
+  const crowdLevel = facility.level.toLocaleLowerCase();
+  const handleDetailPress = () => onPress(facility.id);
 
   return (
-    <View style={styles.box}>
-      <TouchableOpacity onPress={() => onPress(facility.id)}>
+    <View style={styles.container}>
+      <TouchableOpacity onPress={handleDetailPress}>
         <Ionicons
           name="chevron-forward"
           size={24}
@@ -27,11 +28,11 @@ export default function FacilityList({ facility, onPress }: Props) {
         <View style={styles.crowdLevel}>
           <Text style={styles.subtitle}>Crowd Level: </Text>
           <View style={[
-            styles.crowdLevelBox,
+            styles.statusBox,
             { backgroundColor: getBackgroundColorByCrowdLevel(crowdLevel) }
           ]}>
             <Text style={[
-              styles.crowdLevelText,
+              styles.colorText,
               { color: getColorByCrowdLevel(crowdLevel) }
             ]}>
               {crowdLevel.toUpperCase()}
@@ -44,7 +45,7 @@ export default function FacilityList({ facility, onPress }: Props) {
 }
 
 const styles = StyleSheet.create({
-  box: {
+  container: {
     padding: 30,
     paddingHorizontal: 15,
     borderBottomWidth: 1,
@@ -74,12 +75,12 @@ const styles = StyleSheet.create({
     color: "#707070",
     letterSpacing: 0.6,
   },
-  crowdLevelBox: {
+  statusBox: {
     borderRadius: 3,
     width: 110,
     marginHorizontal: 5,
   },
-  crowdLevelText: {
+  colorText: {
     fontWeight: "bold",
     textAlign: "center",
     paddingVertical: 3,
