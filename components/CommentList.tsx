@@ -11,7 +11,7 @@ import {
 } from "react-native";
 
 export interface Comment {
-  id: string;
+  id: Date;
   text: string;
 };
 
@@ -26,13 +26,37 @@ export default function CommentList({
   allCommentsVisible,
   setAllCommentsVisible
 }: Props) {
+  const diffInMinutes = (data: Date): string => {
+    const now = new Date();
+    const diffMs = Math.abs(now.getTime() - data.getTime());
+    const diffMin = Math.floor(diffMs / 60000);
+
+    if (diffMin >= 60) {
+      const diffHour = Math.floor(diffMin / 60);
+      return `${diffHour}h`;
+    }
+    return `${diffMin}m`;
+  };
+
+  const fixTextLength = (text: string): string => {
+    const maxLength = 85;
+
+    if (text.length <= maxLength) return text;
+
+    const cutOff = text.includes(" ") ? maxLength : maxLength - 14;
+    return text.slice(0, cutOff).trimEnd() + " ...";
+  };
+
+  const commentsLength = comments.length;
   const smallScreenRenderItem: ListRenderItem<Comment> = ({ item }) => (
     // <TouchableOpacity onPress={() => setAllCommentsVisible(true)}>
       <View style={styles.container}>
         <View style={styles.commentLine}>
-          <Text style={styles.time}>{item.id}</Text>
+          <View style={styles.timeBox}>
+            <Text style={styles.timeText}>{diffInMinutes(item.id)}</Text>
+          </View>
           <Image source={ProfileImage} style={styles.profileImage} />
-          <Text style={styles.comments}>{item.text}</Text>
+          <Text style={styles.comments}>{fixTextLength(item.text)}</Text>
         </View>
       </View>
     // </TouchableOpacity>
@@ -51,8 +75,8 @@ export default function CommentList({
   return (
     <>
       <FlatList
-        data={comments.slice(0, 3)}
-        keyExtractor={(item) => item.id}
+        data={comments.slice(commentsLength - 3, commentsLength).reverse()}
+        keyExtractor={(item) => item.id.toString()}
         renderItem={smallScreenRenderItem}
         scrollEnabled={false}
         // keyboardShouldPersistTaps="handled"
@@ -68,8 +92,8 @@ export default function CommentList({
         <View style={styles.modalContainer}>
           <Text style={styles.modalTitle}>All Comments</Text>
           <FlatList
-            data={comments}
-            keyExtractor={(item) => item.id}
+            data={comments.reverse()}
+            keyExtractor={(item) => item.id.toString()}
             renderItem={fullScreenRenderItem}
           />
           <TouchableOpacity onPress={() => setAllCommentsVisible(false)}>
@@ -92,22 +116,25 @@ const styles = StyleSheet.create({
     marginBottom: 4,
     width: "75%",
   },
-  time: {
+  timeBox: {
+    width: 40,
+    paddingRight: 8,
+  },
+  timeText: {
     fontSize: 14,
-    textAlign: "center",
+    alignSelf: "center",
     color: "#707070",
     letterSpacing: 0.3,
-    width: 45,
   },
   profileImage: {
     width: 30,
     height: 30,
     borderRadius: 15,
-    marginHorizontal: 10,
   },
   comments: {
     fontSize: 12,
     color: "#333",
+    marginLeft: 8,
   },
 
   name: {

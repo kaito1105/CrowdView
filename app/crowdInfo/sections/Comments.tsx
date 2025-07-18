@@ -14,10 +14,10 @@ import {
 
 export default function Comments() {
   const [comments, setComments] = useState<Comment[]>([
-    { id: "1min", text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor." },
-    { id: "2min", text: "labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ." },
-    { id: "13min", text: "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " },
-    { id: "40min", text: "Hello Hello" },
+    { id: new Date("2025-07-18T10:01:00"), text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor." },
+    { id: new Date("2025-07-18T09:02:00"), text: "labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ." },
+    { id: new Date("2025-07-18T10:03:00"), text: "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk" },
+    { id: new Date("2025-07-18T11:04:00"), text: "Helloooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo" },
   ]);
   const [newCommentVisible, setNewCommentVisible] = useState<boolean>(false);
   const [newComment, setNewComment] = useState<string>("");
@@ -26,9 +26,10 @@ export default function Comments() {
   const addComment = (): void => {
     if (newComment.trim() === "") return;
 
+    const now = new Date();
     setComments((prev) => [
       ...prev,
-      { id: Date.now.toString(), text: newComment },
+      { id: now, text: newComment },
     ]);
 
     setNewComment("");
@@ -39,7 +40,7 @@ export default function Comments() {
     <View style={styles.container}>
       <View style={styles.titleSection}>
         <Text style={styles.title}>Recent Comments</Text>
-        <TouchableOpacity style={styles.seeMoreButton}>
+        <TouchableOpacity style={styles.seeMoreButton} onPress={() => setAllCommentsVisible(true)}>
           <Text style={styles.seeMoreText}>SEE MORE</Text>
           <Ionicons
             name="chevron-forward"
@@ -121,7 +122,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.3,
   },
   commentSection: {
-    marginHorizontal: 10,
+    // marginHorizontal: 2,
   },
   noComments: {
     color: "#707070",
