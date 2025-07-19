@@ -14,6 +14,13 @@ export default function CrowdInfoLayout() {
             <Header hasBack={true} title={facility?.id ?? "Crowd Info"} />
         }}
       />
+      <Stack.Screen
+        name="allComments"
+        options={{
+          header: () =>
+            <Header hasBack={true} title={facility?.id ?? "Recent Comments"} />
+        }}
+      />
     </Stack>
   );
 }

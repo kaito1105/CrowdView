@@ -1,29 +1,37 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 
 export default function VoteButtons() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const imageMap: { [key: string]: any[] } = {
+    light_blue: [
+      require("@/assets/images/light_blue.png"),
+      require("@/assets/images/light_blue_gray.png"),
+    ],
+    light_yellow: [
+      require("@/assets/images/light_yellow.png"),
+      require("@/assets/images/light_yellow_gray.png"),
+    ],
+    light_red: [
+      require("@/assets/images/light_red.png"),
+      require("@/assets/images/light_red_gray.png"),
+    ],
+  };
 
-  const handlePress = (index: number) => {
+  const handleVotePress = (index: number) => {
     setSelectedIndex(index);
   };
 
   return (
     <View style={styles.container}>
-      {[0, 1, 2].map((index) => (
-        <TouchableOpacity
-          key={index}
-          style={[
-            styles.button,
-            selectedIndex === index
-              ? styles.selectedButton
-              : selectedIndex === null
-              ? styles.initialButton
-              : styles.unselectedButton,
-          ]}
-          onPress={() => handlePress(index)}
-        >
-          <Text style={styles.buttonText}>Button {index + 1}</Text>
+      {Object.entries(imageMap).map(([imageName, imageSource], index) => (
+        <TouchableOpacity key={index} onPress={() => handleVotePress(index)}>
+          <Image
+            source={selectedIndex === null ?
+              imageSource[0] : selectedIndex === index ?
+                imageSource[0] : imageSource[1]}
+            style={styles.image}
+          />
         </TouchableOpacity>
       ))}
     </View>
@@ -34,24 +42,11 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     justifyContent: "space-around",
-    marginBottom: 30,
+    marginBottom: 35,
   },
-  button: {
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 8,
-  },
-  buttonText: {
-    color: "#fff",
-    fontWeight: "bold",
-  },
-  initialButton: {
-    backgroundColor: "black",
-  },
-  selectedButton: {
-    backgroundColor: "green",
-  },
-  unselectedButton: {
-    backgroundColor: "gray",
+  image: {
+    width: 115,
+    height: 90,
+    borderRadius: 10,
   },
 });

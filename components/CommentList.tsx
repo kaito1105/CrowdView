@@ -3,10 +3,8 @@ import {
   FlatList,
   Image,
   ListRenderItem,
-  Modal,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View
 } from "react-native";
 
@@ -18,14 +16,10 @@ export interface Comment {
 interface Props {
   comments: Comment[];
   allCommentsVisible: boolean;
-  setAllCommentsVisible: (visible: boolean) => void;
 };
 
-export default function CommentList({
-  comments,
-  allCommentsVisible,
-  setAllCommentsVisible
-}: Props) {
+export default function CommentList({ comments, allCommentsVisible }: Props) {
+
   const diffInMinutes = (data: Date): string => {
     const now = new Date();
     const diffMs = Math.abs(now.getTime() - data.getTime());
@@ -47,19 +41,16 @@ export default function CommentList({
     return text.slice(0, cutOff).trimEnd() + " ...";
   };
 
-  const commentsLength = comments.length;
   const smallScreenRenderItem: ListRenderItem<Comment> = ({ item }) => (
-    // <TouchableOpacity onPress={() => setAllCommentsVisible(true)}>
-      <View style={styles.container}>
-        <View style={styles.commentLine}>
-          <View style={styles.timeBox}>
-            <Text style={styles.timeText}>{diffInMinutes(item.id)}</Text>
-          </View>
-          <Image source={ProfileImage} style={styles.profileImage} />
-          <Text style={styles.comments}>{fixTextLength(item.text)}</Text>
+    <View style={styles.container}>
+      <View style={styles.commentLine}>
+        <View style={styles.timeBox}>
+          <Text style={styles.timeText}>{diffInMinutes(item.id)}</Text>
         </View>
+        <Image source={ProfileImage} style={styles.profileImage} />
+        <Text style={styles.comments}>{fixTextLength(item.text)}</Text>
       </View>
-    // </TouchableOpacity>
+    </View>
   );
 
   const fullScreenRenderItem: ListRenderItem<Comment> = ({ item }) => (
@@ -74,15 +65,26 @@ export default function CommentList({
 
   return (
     <>
-      <FlatList
-        data={comments.slice(commentsLength - 3, commentsLength).reverse()}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={smallScreenRenderItem}
-        scrollEnabled={false}
+      {!allCommentsVisible ?
+        <FlatList
+          data={comments.slice(0, 3)}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={smallScreenRenderItem}
+          scrollEnabled={false}
         // keyboardShouldPersistTaps="handled"
-      />
+        /> :
+        <View style={styles.modalContainer}>
+          <Text style={styles.modalTitle}>All Comments</Text>
+          <FlatList
+            data={comments}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={fullScreenRenderItem}
+          />
+        </View>
+      }
 
-      <Modal
+
+      {/* <Modal
         visible={allCommentsVisible}
         animationType="slide"
         transparent
@@ -92,7 +94,7 @@ export default function CommentList({
         <View style={styles.modalContainer}>
           <Text style={styles.modalTitle}>All Comments</Text>
           <FlatList
-            data={comments.reverse()}
+            data={comments}
             keyExtractor={(item) => item.id.toString()}
             renderItem={fullScreenRenderItem}
           />
@@ -100,7 +102,7 @@ export default function CommentList({
             <Text style={styles.closeText}>Close</Text>
           </TouchableOpacity>
         </View>
-      </Modal>
+      </Modal> */}
     </>
   );
 }
