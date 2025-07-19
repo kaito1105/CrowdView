@@ -7,7 +7,7 @@ export default function MapLayout() {
       <Stack.Screen
         name="index"
         options={{
-          header: () => <Header hasBack={false} title="Map" />
+          header: () => <Header hasBack={false} title="Campus Map" />
         }}
       />
     </Stack>

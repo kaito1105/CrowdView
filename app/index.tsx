@@ -1,5 +1,6 @@
+import LogoImage from "@/assets/images/crowdView_logo.jpg";
 import { useRouter } from "expo-router";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function Index() {
   const router = useRouter();
@@ -9,12 +10,13 @@ export default function Index() {
 
   return (
     <View style={styles.container}>
+      <Image source={LogoImage} style={styles.logoImage} />
       <Text style={styles.title}>Welcome to CrowdView App!</Text>
       <Text style={styles.description}>
         Capture real-time crowd info at LFC
       </Text>
       <TouchableOpacity style={styles.button} onPress={handleStart}>
-        <Text style={styles.buttonText}>Get Started</Text>
+        <Text style={styles.buttonText}>GET STARTED</Text>
       </TouchableOpacity>
     </View>
   );
@@ -25,28 +27,37 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    padding: 20,
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
+    paddingBottom: 60,
+  },
+  logoImage: {
+    width: 250,
+    height: 250,
   },
   title: {
-    fontSize: 24,
+    fontSize: 20,
+    color: "#292929",
+    letterSpacing: 0.8,
     fontWeight: "bold",
-    marginBottom: 10
+    marginTop:20,
+    marginBottom: 10,
   },
   description: {
-    fontSize: 18,
-    marginBottom: 40
+    fontSize: 16,
+    color: "#292929",
+    letterSpacing: 0.5,
+    marginBottom: 30,
   },
   button: {
-    backgroundColor: "#007bff",
-    paddingVertical: 12,
-    paddingHorizontal: 25,
+    backgroundColor: "#33bff4",
+    paddingVertical: 10,
+    paddingHorizontal: 30,
     borderRadius: 8,
-    alignItems: "center"
   },
   buttonText: {
     color: "#fff",
     fontSize: 18,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    letterSpacing: 0.5,
   }
 });

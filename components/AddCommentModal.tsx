@@ -16,10 +16,10 @@ interface AddCommentModalProps {
 }
 
 export default function AddCommentModal({
-  newCommentVisible, 
-  setNewCommentVisible, 
-  newComment, 
-  setNewComment, 
+  newCommentVisible,
+  setNewCommentVisible,
+  newComment,
+  setNewComment,
   addComment,
 }: AddCommentModalProps) {
   return (
@@ -32,25 +32,25 @@ export default function AddCommentModal({
       <View style={styles.overlay}>
         <View style={styles.content}>
           <Text style={styles.title}>Add a New Comment</Text>
-          
+
           <TextInput
             style={styles.input}
             placeholder="Enter comment..."
             placeholderTextColor="#aaa"
             value={newComment}
-            onChangeText={setNewComment} 
+            onChangeText={setNewComment}
           />
 
           <View style={styles.buttons}>
-            <TouchableOpacity 
+            <TouchableOpacity
               style={styles.cancelButton}
               onPress={() => setNewCommentVisible(false)}
             >
               <Text style={styles.cancelButtonText}>Cancel</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity 
-              style={styles.postButton} 
+            <TouchableOpacity
+              style={styles.postButton}
               onPress={addComment}
             >
               <Text style={styles.postButtonText}>Post</Text>

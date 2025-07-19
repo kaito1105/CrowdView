@@ -4,15 +4,16 @@ import { Tabs } from 'expo-router';
 export default function TabLayout() {
 
   return (
-    <Tabs 
+    <Tabs
       screenOptions={{
-        headerShown: false
+        headerShown: false,
+        tabBarActiveTintColor: "#33bff4",
       }}>
       <Tabs.Screen
         name="map"
         options={{
           title: 'Map',
-          tabBarIcon: ({ color }) => 
+          tabBarIcon: ({ color }) =>
             <IconSymbol size={28} name="pin" color={color} />
         }}
       />
@@ -20,7 +21,7 @@ export default function TabLayout() {
         name="list"
         options={{
           title: 'List',
-          tabBarIcon: ({ color }) => 
+          tabBarIcon: ({ color }) =>
             <IconSymbol size={32} name="menucard" color={color} />
         }}
       />
@@ -28,7 +29,7 @@ export default function TabLayout() {
         name="settings"
         options={{
           title: 'Settings',
-          tabBarIcon: ({ color }) => 
+          tabBarIcon: ({ color }) =>
             <IconSymbol size={28} name="gear" color={color} />
         }}
       />

@@ -7,15 +7,15 @@ export default function ListScreen() {
   const router = useRouter();
   const handleDetailPress = (id: string) => router.push(`/crowdInfo/${id}`);
 
-  const renderItem: ListRenderItem<Facility> = ({ item }) => (
-    <FacilityList facility={item} onPress={handleDetailPress} />
+  const renderItem: ListRenderItem<Facility> = ({ item: facility }) => (
+    <FacilityList facility={facility} onPress={handleDetailPress} />
   );
 
   return (
     <FlatList
       style={styles.container}
       data={FACILITIES}
-      keyExtractor={item => item.id.toString()}
+      keyExtractor={facility => facility.id.toString()}
       renderItem={renderItem}
     />
   );
@@ -25,5 +25,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    paddingTop: 15,
   },
 });

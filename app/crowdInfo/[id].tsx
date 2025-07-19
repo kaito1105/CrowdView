@@ -1,40 +1,73 @@
 import useFacility from "@/hooks/useFacility";
-import { StyleSheet, Text, View } from "react-native";
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View
+} from "react-native";
+import BusinessHours from "./sections/BusinessHours";
 import Comments from "./sections/Comments";
+import CrowdLevelCard from "./sections/CrowdLevelCard";
+import FacilityImage from "./sections/FacilityImage";
+import FacilityTitle from "./sections/FacilityTitle";
+import Graph from "./sections/Graph";
+import Vote from "./sections/Vote";
 
 export default function CrowdInfoScreen() {
   const facility = useFacility();
+  if (!facility) return <Text>Facility not found.</Text>;
 
   return (
-    <View style={styles.background}>
-      {facility ? (
-        <View style={styles.container}>
-          <Text style={styles.crowdInfo}>Crowd level: </Text>
-          <Text style={styles.vote}>Vote:</Text>
-          <Comments />
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ flex: 1 }}
+    // keyboardVerticalOffset={Platform.OS === "ios" ? 20 : 0}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.background}>
+          <ScrollView
+            style={{ flex: 1 }}
+            showsVerticalScrollIndicator={false}
+            keyboardShouldPersistTaps="handled"
+          >
+            <FacilityImage imagePath={facility.imagePath} />
+            <View style={styles.container}>
+              <FacilityTitle id={facility.id} />
+              <View style={styles.section}>
+                <CrowdLevelCard level={facility.level} />
+                <BusinessHours
+                  hours={facility.hours}
+                  dayIndex={new Date().getDay()}
+                />
+              </View>
+              <Vote />
+              <Graph />
+              <Comments />
+            </View>
+          </ScrollView>
         </View>
-      ) : (
-        <Text>Facility not found.</Text>
-      )}
-    </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
   background: {
-    flex: 1,
     backgroundColor: "#fff",
+    flex: 1,
   },
   container: {
-    marginHorizontal: 20,
+    flex: 1,
+    marginHorizontal: 30,
     marginVertical: 20,
   },
-  crowdInfo: {
-    fontWeight: "bold",
-    marginBottom: 10,
-  },
-  vote: {
-    fontWeight: "bold",
-    marginBottom: 10,
+  section: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 30,
   },
 });

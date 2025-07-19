@@ -1,4 +1,9 @@
 import { Facility } from "@/constants/Facilities";
+import {
+  getBackgroundColorByCrowdLevel,
+  getColorByCrowdLevel
+} from "@/utils/colorUtils";
+import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 interface Props {
@@ -6,79 +11,80 @@ interface Props {
   onPress: (id: string) => void;
 };
 
-const getColorByCrowdLevel = (level: string): string => {
-  switch (level) {
-    case "high":
-      return "tomato";
-    case "mid":
-      return "orange";
-    case "low":
-      return "green";
-    default:
-      return "black";
-  }
-};
-
-const getEmojiByCrowdLevel = (level: string): string => {
-  switch (level) {
-    case "high":
-      return "😫";
-    case "mid":
-      return "😐";
-    case "low":
-      return "😊";
-    default:
-      return "";
-  }
-};
-
 export default function FacilityList({ facility, onPress }: Props) {
+  const crowdLevel = facility.level.toLocaleLowerCase();
+  const handleDetailPress = () => onPress(facility.id);
+
   return (
-    <View style={styles.box}>
-      <TouchableOpacity 
-        style={styles.button} 
-        onPress={() => onPress(facility.id)}
-      >
-        <Text style={styles.buttonText}>Details</Text>
+    <View style={styles.container}>
+      <TouchableOpacity onPress={handleDetailPress}>
+        <Ionicons
+          name="chevron-forward"
+          size={24}
+          color="#a4a4a4a4"
+          style={styles.icon}
+        />
+        <Text style={styles.title}>{facility.id}</Text>
+        <View style={styles.crowdLevel}>
+          <Text style={styles.subtitle}>Crowd Level: </Text>
+          <View style={[
+            styles.statusBox,
+            { backgroundColor: getBackgroundColorByCrowdLevel(crowdLevel) }
+          ]}>
+            <Text style={[
+              styles.colorText,
+              { color: getColorByCrowdLevel(crowdLevel) }
+            ]}>
+              {crowdLevel.toUpperCase()}
+            </Text>
+          </View>
+        </View>
       </TouchableOpacity>
-      <Text style={styles.title}>{facility.name}</Text>
-      <Text style={styles.description}>
-        Crowd level:{" "}
-        <Text 
-          style={{
-            fontWeight: "bold", 
-            color: getColorByCrowdLevel(facility.description),
-          }}
-        >
-          {`${facility.description} ${getEmojiByCrowdLevel(facility.description)}`}
-        </Text>
-      </Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  box: {
-    padding: 20,
+  container: {
+    padding: 30,
+    paddingHorizontal: 15,
     borderBottomWidth: 1,
-    borderColor: "#ccc",
+    borderColor: "#cccccc",
+    width: "90%",
+    alignSelf: "center",
   },
-  button: {
+  icon: {
     position: "absolute",
-    top: 24,
-    right: 20,
+    top: "30%",
+    right: -10,
     zIndex: 999,
   },
-  buttonText: {
-    fontSize: 16,
-    textDecorationLine: "underline",
-  },
   title: {
-    fontWeight: "bold",
-    fontSize: 24,
-    marginBottom: 10,
+    fontSize: 22,
+    color: "#292929",
+    marginBottom: 4,
+    letterSpacing: 0.8,
   },
-  description: {
+  crowdLevel: {
+    width: "100%",
+    alignItems: "center",
+    flexDirection: "row",
+  },
+  subtitle: {
     fontSize: 16,
+    color: "#707070",
+    letterSpacing: 0.6,
+  },
+  statusBox: {
+    borderRadius: 3,
+    width: 110,
+    marginHorizontal: 5,
+  },
+  colorText: {
+    fontWeight: "bold",
+    textAlign: "center",
+    paddingVertical: 3,
+    fontSize: 16,
+    letterSpacing: 0.6,
   },
 });
