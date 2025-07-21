@@ -1,4 +1,4 @@
-import CommentList, { Comment } from "@/components/CommentList";
+import { Comment } from "@/components/CommentList";
 import PostComment from "@/components/PostComment";
 import useFacility from "@/hooks/useFacility";
 import { Ionicons } from '@expo/vector-icons';
@@ -13,7 +13,6 @@ import {
 
 export default function Comments() {
   const router = useRouter();
-
   const [comments, setComments] = useState<Comment[]>([
     { id: new Date("2025-07-18T11:04:00"), text: "Helloooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo" },
     { id: new Date("2025-07-18T10:03:00"), text: "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk" },
@@ -38,7 +37,6 @@ export default function Comments() {
     ]);
 
     setNewComment("");
-    // setNewCommentVisible(false);
   };
 
   return (
@@ -58,13 +56,13 @@ export default function Comments() {
         </TouchableOpacity>
       </View>
 
-      <View style={styles.commentSection}>
+      {/* <View style={styles.commentSection}>
         {comments.length === 0 ? (
           <Text style={styles.noComments}>No comments</Text>
         ) : (
           <CommentList comments={comments} allCommentsVisible={false} />
         )}
-      </View>
+      </View> */}
 
       <PostComment
         newComment={newComment}
@@ -109,6 +107,6 @@ const styles = StyleSheet.create({
     color: "#707070",
     textAlign: "center",
     fontSize: 22,
-    paddingTop: 50,
+    marginVertical: 20,
   },
 });
