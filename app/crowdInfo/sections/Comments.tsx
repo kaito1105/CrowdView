@@ -1,14 +1,16 @@
-import { Comment } from "@/components/CommentList";
+import CommentList, { Comment } from "@/components/CommentList";
 import PostComment from "@/components/PostComment";
 import useFacility from "@/hooks/useFacility";
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
+  FlatList,
+  ListRenderItem,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 
 export default function Comments() {
@@ -21,7 +23,7 @@ export default function Comments() {
   ]);
   const [newComment, setNewComment] = useState<string>("");
 
-  const handleCommentPress = (id: string) => 
+  const handleCommentPress = (id: string) =>
     router.push(`/crowdInfo/allComments/${id}`);
 
   const facility = useFacility();
@@ -35,9 +37,12 @@ export default function Comments() {
       { id: now, text: newComment },
       ...prev,
     ]);
-
     setNewComment("");
   };
+
+  const renderItem: ListRenderItem<Comment> = ({ item: comment }) => (
+      <CommentList comment={comment} allCommentsVisible={false} />
+    );
 
   return (
     <View style={styles.container}>
@@ -56,13 +61,21 @@ export default function Comments() {
         </TouchableOpacity>
       </View>
 
-      {/* <View style={styles.commentSection}>
+      <View style={styles.commentSection}>
         {comments.length === 0 ? (
           <Text style={styles.noComments}>No comments</Text>
         ) : (
-          <CommentList comments={comments} allCommentsVisible={false} />
+          <FlatList
+            // style={styles.commentContainer}
+            data={comments.slice(0, 3)}
+            keyExtractor={comment => comment.id.toString()}
+            renderItem={renderItem}
+            scrollEnabled={false}
+            keyboardShouldPersistTaps="handled"
+          />
+          // <CommentList comments={comments} allCommentsVisible={false} />
         )}
-      </View> */}
+      </View>
 
       <PostComment
         newComment={newComment}

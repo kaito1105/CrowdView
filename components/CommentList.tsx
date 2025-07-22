@@ -1,7 +1,6 @@
 import ProfileImage from "@/assets/images/profile_temp.jpg";
 import {
   Image,
-  ListRenderItem,
   StyleSheet,
   Text,
   View
@@ -40,30 +39,19 @@ export default function CommentList({ comment, allCommentsVisible }: Props) {
     return text.slice(0, cutOff).trimEnd() + " ...";
   };
 
-  const smallScreenRenderItem: ListRenderItem<Comment> = ({ item }) => (
-    <View style={styles.container}>
-      <View style={styles.commentLine}>
-        <View style={styles.timeBox}>
-          <Text style={styles.timeText}>{diffInMinutes(item.id)}</Text>
-        </View>
-        <Image source={ProfileImage} style={styles.profileImage} />
-        <Text style={styles.comments}>{fixTextLength(item.text)}</Text>
-      </View>
-    </View>
-  );
-
   return (
     <>
-      {!allCommentsVisible ?
-        <Text>Hello</Text> :
-        // <FlatList
-        //   data={comments.slice(0, 3)}
-        //   keyExtractor={(item) => item.id.toString()}
-        //   renderItem={smallScreenRenderItem}
-        //   scrollEnabled={false}
-        // // keyboardShouldPersistTaps="handled"
-        // /> :
-
+      {!allCommentsVisible ? (
+        <View style={styles.container}>
+          <View style={styles.commentLine}>
+            <View style={styles.timeBox}>
+              <Text style={styles.timeText}>{diffInMinutes(comment.id)}</Text>
+            </View>
+            <Image source={ProfileImage} style={styles.profileImage} />
+            <Text style={styles.comments}>{fixTextLength(comment.text)}</Text>
+          </View>
+        </View>
+      ) : (
         <View style={styles.fullContainer}>
           <View style={styles.commentWrapper}>
             <Image source={ProfileImage} style={styles.fullProfileImage} />
@@ -76,7 +64,7 @@ export default function CommentList({ comment, allCommentsVisible }: Props) {
             </View>
           </View>
         </View>
-      }
+      )}
     </>
   );
 }
@@ -84,7 +72,7 @@ export default function CommentList({ comment, allCommentsVisible }: Props) {
 const styles = StyleSheet.create({
   container: {
     marginBottom: 10,
-    backgroundColor: "#fff",
+    backgroundColor: "#ffffff",
   },
   commentLine: {
     flexDirection: "row",

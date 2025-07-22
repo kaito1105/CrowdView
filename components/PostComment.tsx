@@ -48,7 +48,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#fff",
+    backgroundColor: "#ffffff",
+    borderRadius: 10,
   },
   profileImage: {
     width: 30,
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
   textInput: {
     flex: 1,
     borderWidth: 1,
-    borderColor: "#ccc",
+    borderColor: "#cccccc",
     borderRadius: 8,
     paddingHorizontal: 10,
     paddingVertical: 5,
