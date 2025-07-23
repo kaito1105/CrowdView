@@ -1,8 +1,13 @@
-import { Dimensions, StyleSheet, Text, View } from "react-native";
+import ExclamationIcon from "@/components/ui/ExclamationIcon";
+import { Alert, Dimensions, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { LineChart } from "react-native-chart-kit";
 
 export default function Graph() {
   const dataLabels: string[] = [];
+
+  const handleGraphPress = () => {
+    Alert.alert("The number of people in the facility within the past 3 hours is displayed.");
+  };
 
   const insertDataLabels = () => {
     const now = new Date();
@@ -24,7 +29,12 @@ export default function Graph() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.subtitle}>Crowd Level Graph</Text>
+      <View style={styles.header}>
+        <Text style={styles.subtitle}>Crowd Level Graph</Text>
+        <TouchableOpacity onPress={handleGraphPress}>
+          <ExclamationIcon />
+        </TouchableOpacity>
+      </View>
       <Text style={styles.graphTitle}>Last 3 Hours</Text>
       <LineChart
         data={{
@@ -55,6 +65,10 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "40%",
     marginBottom: 40,
+  },
+  header: {
+    flexDirection: "row",
+    alignContent: "center",
   },
   subtitle: {
     fontSize: 14,
