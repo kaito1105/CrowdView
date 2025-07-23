@@ -77,11 +77,25 @@ const styles = StyleSheet.create({
     paddingTop: 15,
   },
   footer: {
-    backgroundColor: "#e3e3e3",
+    backgroundColor: "#ffffff",
     position: "absolute",
-    alignSelf: "center",
-    width: "100%",
+    left: 0,
+    right: 0,
     bottom: 0,
     paddingVertical: 10,
+    paddingHorizontal: 10,
+    // borderWidth: 1,
+    // borderColor: "#bbbbbb",
+    // borderRadius: 10,
+
+    // iOS shadow
+    shadowColor: "#000000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+
+    // Android shadow
+    elevation: 3,
   },
+
 });

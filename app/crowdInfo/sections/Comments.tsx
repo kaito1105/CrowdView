@@ -41,8 +41,8 @@ export default function Comments() {
   };
 
   const renderItem: ListRenderItem<Comment> = ({ item: comment }) => (
-      <CommentList comment={comment} allCommentsVisible={false} />
-    );
+    <CommentList comment={comment} allCommentsVisible={false} />
+  );
 
   return (
     <View style={styles.container}>
@@ -61,22 +61,18 @@ export default function Comments() {
         </TouchableOpacity>
       </View>
 
-      <View style={styles.commentSection}>
+      <View>
         {comments.length === 0 ? (
           <Text style={styles.noComments}>No comments</Text>
         ) : (
           <FlatList
-            // style={styles.commentContainer}
             data={comments.slice(0, 3)}
             keyExtractor={comment => comment.id.toString()}
             renderItem={renderItem}
             scrollEnabled={false}
-            keyboardShouldPersistTaps="handled"
           />
-          // <CommentList comments={comments} allCommentsVisible={false} />
         )}
       </View>
-
       <PostComment
         newComment={newComment}
         setNewComment={setNewComment}
@@ -112,9 +108,6 @@ const styles = StyleSheet.create({
     color: "#0a78f2",
     fontSize: 13,
     letterSpacing: 0.3,
-  },
-  commentSection: {
-    // marginHorizontal: 2,
   },
   noComments: {
     color: "#707070",
