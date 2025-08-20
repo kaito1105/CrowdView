@@ -14,7 +14,7 @@ import Comments from "./sections/Comments";
 import CrowdLevelCard from "./sections/CrowdLevelCard";
 import FacilityImage from "./sections/FacilityImage";
 import FacilityTitle from "./sections/FacilityTitle";
-import Graph from "./sections/Graph";
+// import Graph from "./sections/Graph";
 import Vote from "./sections/Vote";
 
 export default function CrowdInfoScreen() {
@@ -45,7 +45,7 @@ export default function CrowdInfoScreen() {
                 />
               </View>
               <Vote />
-              <Graph />
+              {/* <Graph /> */}
               <Comments />
             </View>
           </ScrollView>

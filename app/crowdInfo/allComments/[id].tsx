@@ -15,10 +15,10 @@ import {
 
 export default function AllCommentsScreen() {
   const [comments, setComments] = useState<Comment[]>([
-    { id: new Date("2025-07-23T12:42:00"), text: "Getting a bit crowded around lunchtime, especially near the entrance area." },
-    { id: new Date("2025-07-23T11:59:00"), text: "Very packed today, almost no space to sit. I’d recommend coming later." },
-    { id: new Date("2025-07-23T10:01:00"), text: "I stopped by around 10 a.m., and the place was surprisingly quiet. Most of the tables were available, and I didn’t have to wait at all to use the equipment. It was a very relaxed atmosphere—great time to come if you prefer fewer people around." },
-    { id: new Date("2025-07-23T09:02:00"), text: "Hello!" },
+    { id: new Date("2025-08-20T17:12:00"), text: "Getting a bit crowded around lunchtime, especially near the entrance area." },
+    { id: new Date("2025-08-20T16:55:00"), text: "Very packed today, almost no space to sit. I’d recommend coming later." },
+    { id: new Date("2025-08-20T15:01:00"), text: "I stopped by around 10 a.m., and the place was surprisingly quiet. Most of the tables were available, and I didn’t have to wait at all to use the equipment. It was a very relaxed atmosphere—great time to come if you prefer fewer people around." },
+    { id: new Date("2025-08-20T09:02:00"), text: "Hello!" },
   ]);
   const [newComment, setNewComment] = useState<string>("");
 
