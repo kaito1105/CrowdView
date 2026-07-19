@@ -14,7 +14,7 @@ import Comments from "./sections/Comments";
 import CrowdLevelCard from "./sections/CrowdLevelCard";
 import FacilityImage from "./sections/FacilityImage";
 import FacilityTitle from "./sections/FacilityTitle";
-import Graph from "./sections/Graph";
+// import Graph from "./sections/Graph";
 import Vote from "./sections/Vote";
 
 export default function CrowdInfoScreen() {
@@ -25,7 +25,7 @@ export default function CrowdInfoScreen() {
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={{ flex: 1 }}
-    // keyboardVerticalOffset={Platform.OS === "ios" ? 20 : 0}
+      // keyboardVerticalOffset={Platform.OS === "ios" ? 10 : 0}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.background}>
@@ -45,7 +45,7 @@ export default function CrowdInfoScreen() {
                 />
               </View>
               <Vote />
-              <Graph />
+              {/* <Graph /> */}
               <Comments />
             </View>
           </ScrollView>
@@ -57,13 +57,13 @@ export default function CrowdInfoScreen() {
 
 const styles = StyleSheet.create({
   background: {
-    backgroundColor: "#fff",
     flex: 1,
   },
   container: {
     flex: 1,
-    marginHorizontal: 30,
-    marginVertical: 20,
+    paddingHorizontal: 30,
+    paddingVertical: 20,
+    backgroundColor: "#ffffff",
   },
   section: {
     flexDirection: "row",

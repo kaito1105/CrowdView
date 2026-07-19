@@ -90,7 +90,7 @@ export default function SettingsScreen() {
       </TouchableOpacity>
 
       <View style={styles.profile}>
-        <Text style={styles.name}>Kaito Miyamoto</Text>
+        <Text style={styles.name}>Chris Albert</Text>
         
         <View style={styles.section}>
           <View style={styles.email}>

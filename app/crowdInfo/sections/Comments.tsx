@@ -5,24 +5,25 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
+  FlatList,
+  ListRenderItem,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 
 export default function Comments() {
   const router = useRouter();
-
   const [comments, setComments] = useState<Comment[]>([
-    { id: new Date("2025-07-18T11:04:00"), text: "Helloooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo" },
-    { id: new Date("2025-07-18T10:03:00"), text: "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk" },
-    { id: new Date("2025-07-18T10:01:00"), text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor." },
-    { id: new Date("2025-07-18T09:02:00"), text: "labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ." },
+    { id: new Date("2025-08-20T17:12:00"), text: "Getting a bit crowded around lunchtime, especially near the entrance area." },
+    { id: new Date("2025-08-20T16:55:00"), text: "Very packed today, almost no space to sit. I’d recommend coming later." },
+    { id: new Date("2025-08-20T15:01:00"), text: "I stopped by around 10 a.m., and the place was surprisingly quiet. Most of the tables were available, and I didn’t have to wait at all to use the equipment. It was a very relaxed atmosphere—great time to come if you prefer fewer people around." },
+    { id: new Date("2025-08-20T09:02:00"), text: "Hello!" },
   ]);
   const [newComment, setNewComment] = useState<string>("");
 
-  const handleCommentPress = (id: string) => 
+  const handleCommentPress = (id: string) =>
     router.push(`/crowdInfo/allComments/${id}`);
 
   const facility = useFacility();
@@ -36,10 +37,12 @@ export default function Comments() {
       { id: now, text: newComment },
       ...prev,
     ]);
-
     setNewComment("");
-    // setNewCommentVisible(false);
   };
+
+  const renderItem: ListRenderItem<Comment> = ({ item: comment }) => (
+    <CommentList comment={comment} allCommentsVisible={false} />
+  );
 
   return (
     <View style={styles.container}>
@@ -58,14 +61,18 @@ export default function Comments() {
         </TouchableOpacity>
       </View>
 
-      <View style={styles.commentSection}>
+      <View>
         {comments.length === 0 ? (
           <Text style={styles.noComments}>No comments</Text>
         ) : (
-          <CommentList comments={comments} allCommentsVisible={false} />
+          <FlatList
+            data={comments.slice(0, 3)}
+            keyExtractor={comment => comment.id.toString()}
+            renderItem={renderItem}
+            scrollEnabled={false}
+          />
         )}
       </View>
-
       <PostComment
         newComment={newComment}
         setNewComment={setNewComment}
@@ -102,13 +109,10 @@ const styles = StyleSheet.create({
     fontSize: 13,
     letterSpacing: 0.3,
   },
-  commentSection: {
-    // marginHorizontal: 2,
-  },
   noComments: {
     color: "#707070",
     textAlign: "center",
     fontSize: 22,
-    paddingTop: 50,
+    marginVertical: 20,
   },
 });

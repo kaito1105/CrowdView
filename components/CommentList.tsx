@@ -1,8 +1,6 @@
 import ProfileImage from "@/assets/images/profile_temp.jpg";
 import {
-  FlatList,
   Image,
-  ListRenderItem,
   StyleSheet,
   Text,
   View
@@ -14,11 +12,11 @@ export interface Comment {
 };
 
 interface Props {
-  comments: Comment[];
+  comment: Comment;
   allCommentsVisible: boolean;
 };
 
-export default function CommentList({ comments, allCommentsVisible }: Props) {
+export default function CommentList({ comment, allCommentsVisible }: Props) {
 
   const diffInMinutes = (data: Date): string => {
     const now = new Date();
@@ -41,68 +39,32 @@ export default function CommentList({ comments, allCommentsVisible }: Props) {
     return text.slice(0, cutOff).trimEnd() + " ...";
   };
 
-  const smallScreenRenderItem: ListRenderItem<Comment> = ({ item }) => (
-    <View style={styles.container}>
-      <View style={styles.commentLine}>
-        <View style={styles.timeBox}>
-          <Text style={styles.timeText}>{diffInMinutes(item.id)}</Text>
-        </View>
-        <Image source={ProfileImage} style={styles.profileImage} />
-        <Text style={styles.comments}>{fixTextLength(item.text)}</Text>
-      </View>
-    </View>
-  );
-
-  const fullScreenRenderItem: ListRenderItem<Comment> = ({ item }) => (
-    <View style={styles.modalComment}>
-      <View style={styles.commentLine}>
-        <Image source={ProfileImage} style={styles.profileImage} />
-        <Text style={styles.name}>Name</Text>
-      </View>
-      <Text style={styles.comments}>{item.text}</Text>
-    </View>
-  );
-
   return (
     <>
-      {!allCommentsVisible ?
-        <FlatList
-          data={comments.slice(0, 3)}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={smallScreenRenderItem}
-          scrollEnabled={false}
-        // keyboardShouldPersistTaps="handled"
-        /> :
-        <View style={styles.modalContainer}>
-          <Text style={styles.modalTitle}>All Comments</Text>
-          <FlatList
-            data={comments}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={fullScreenRenderItem}
-          />
+      {!allCommentsVisible ? (
+        <View style={styles.container}>
+          <View style={styles.commentLine}>
+            <View style={styles.timeBox}>
+              <Text style={styles.timeText}>{diffInMinutes(comment.id)}</Text>
+            </View>
+            <Image source={ProfileImage} style={styles.profileImage} />
+            <Text style={styles.comments}>{fixTextLength(comment.text)}</Text>
+          </View>
         </View>
-      }
-
-
-      {/* <Modal
-        visible={allCommentsVisible}
-        animationType="slide"
-        transparent
-        onRequestClose={() => setAllCommentsVisible(false)}
-      // presentationStyle="formSheet"
-      >
-        <View style={styles.modalContainer}>
-          <Text style={styles.modalTitle}>All Comments</Text>
-          <FlatList
-            data={comments}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={fullScreenRenderItem}
-          />
-          <TouchableOpacity onPress={() => setAllCommentsVisible(false)}>
-            <Text style={styles.closeText}>Close</Text>
-          </TouchableOpacity>
+      ) : (
+        <View style={styles.fullContainer}>
+          <View style={styles.commentWrapper}>
+            <Image source={ProfileImage} style={styles.fullProfileImage} />
+            <View>
+              <View style={styles.header}>
+                <Text style={styles.name}>Name</Text>
+                <Text style={styles.timeText}>{diffInMinutes(comment.id)} ago</Text>
+              </View>
+              <Text style={styles.fullComments}>{comment.text}</Text>
+            </View>
+          </View>
         </View>
-      </Modal> */}
+      )}
     </>
   );
 }
@@ -110,7 +72,7 @@ export default function CommentList({ comments, allCommentsVisible }: Props) {
 const styles = StyleSheet.create({
   container: {
     marginBottom: 10,
-    backgroundColor: "#fff",
+    backgroundColor: "#ffffff",
   },
   commentLine: {
     flexDirection: "row",
@@ -135,33 +97,42 @@ const styles = StyleSheet.create({
   },
   comments: {
     fontSize: 12,
-    color: "#333",
+    color: "#292929",
     marginLeft: 8,
   },
 
+  fullContainer: {
+    paddingBottom: 15,
+    borderBottomWidth: 1,
+    borderColor: "#cccccc",
+    alignSelf: "center",
+    width: "90%",
+  },
+  fullProfileImage: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+  },
+  commentWrapper: {
+    paddingTop: 15,
+    paddingHorizontal: 10,
+    width: "90%",
+    flexDirection: "row",
+  },
+  header: {
+    flexDirection: "row",
+    marginBottom: 5,
+  },
   name: {
-    fontWeight: "bold",
-    fontSize: 16,
+    fontSize: 14,
+    marginLeft: 8,
+    marginRight: 20,
+    color: "#292929",
+    letterSpacing: 0.3,
   },
-  modalContainer: {
-    flex: 1,
-    backgroundColor: "rgba(255, 255, 255, 0.9)",
-    padding: 20,
-    paddingTop: 50,
-  },
-  modalTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 10,
-    textAlign: "center",
-  },
-  modalComment: {
-    marginBottom: 15,
-  },
-  closeText: {
-    color: "#007bff",
-    textAlign: "center",
-    marginBottom: 20,
-    fontSize: 18,
+  fullComments: {
+    fontSize: 14,
+    color: "#292929",
+    marginLeft: 8,
   },
 });
