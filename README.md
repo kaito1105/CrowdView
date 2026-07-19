@@ -32,23 +32,23 @@ Back-end and database work (to support real-time crowd data) was scoped but not 
 - **Settings** — User preferences and app configuration.
 
 ## App Screens
-
-*(Screenshots captured via Expo Go)*
+<img width="1200" height="628" alt="Purple Phone Mockup Fashion Store Promotion Facebook Ad-2" src="https://github.com/user-attachments/assets/d1b7cd48-cdda-4a81-9051-ccc8297cc044" />
+<img width="950" height="636" alt="Screenshot 2025-08-31 at 8 14 16" src="https://github.com/user-attachments/assets/d81f0a00-29c5-4595-a6af-4f3ac8446312" />
 
 ### Get Started
-<!-- ![get_started](link-to-screenshot) -->
+<img width="414" height="896" alt="IMG_3866" src="https://github.com/user-attachments/assets/485099a0-814b-4e96-88c2-04265c7feaae" />
 
 ### Campus Map
-<!-- ![campus_map](link-to-screenshot) -->
+<img width="414" height="896" alt="IMG_3865" src="https://github.com/user-attachments/assets/d310ce13-3bf9-4263-a684-3a9ce3204ab5" />
 
 ### Facility List
-<!-- ![facility_list](link-to-screenshot) -->
+<img width="414" height="896" alt="IMG_3864" src="https://github.com/user-attachments/assets/591c7094-a9d3-4d52-a22a-9b153a037b77" />
 
 ### Facility Detail
-<!-- ![facility_detail](link-to-screenshot) -->
+<img width="414" height="896" alt="IMG_3863" src="https://github.com/user-attachments/assets/5974a862-3f15-4cc0-b88b-617e7d2cc3fa" />
 
 ### Settings
-<!-- ![settings](link-to-screenshot) -->
+<img width="414" height="896" alt="IMG_3867" src="https://github.com/user-attachments/assets/70e05b44-2a15-4361-a542-8b94b2f62c62" />
 
 ## Technologies Used
 
